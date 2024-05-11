@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --brand: hsl(274, 100%, 60%);
+    --brand10: rgba(165, 50, 255, 0.1);
+    --brand60: hsla(274, 100%, 60%, 0.6);
+    --white: rgba(255, 255, 255);
+    --lightgrey: rgba(170, 170, 170);
+    --whitebg: rgba(241, 241, 241);
+
+    --black: rgba(0, 0, 0);
+    --darkgrey: rgba(85, 85, 85);
+    --blackbg: rgba(18, 18, 18);
+    
+    --btn-bg-color: #A532FF;
+
+    --link-active-bg: hsla(274, 100%, 60%, 0.1);
+}
+
+* {
+    box-sizing: border-box !important;
+    margin: 0;
+    padding: 0;
+}
+
