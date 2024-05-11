@@ -10,10 +10,6 @@
         <title>HIVE</title>
     </head>
     <body>
-        <?php
-            include "../includes/loginHandler.php";
-        
-        ?>
         <div class="row p-0 m-0" style="height: 100vh">
             <div class="col-5 p-0 h-100">
                 <div style="height: 40px">
@@ -25,25 +21,20 @@
             </div>
 
             <div class="col-7 p-0 h-100">
+                <div style="height: 40px">
+                    <h5 class="logotype p-0 pt-3 m-0 me-3  fw-bold d-flex justify-content-end">GO BACK</h5>
+                </div>
                 <div class="h-100 w-100 d-flex justify-content-center align-items-center">
-                    <div class="w-100" style="max-width: 80%">
-                        <h2 class="title">Welcome back!</h2>
-                        <p class="subtitle">Please log into your account.</p>
-                        <form action="" method="POST">
+                    <div class="w-100 mb-5" style="max-width: 80%">
+                        <h2 class="title">Password Recovery</h2>
+                        <p class="subtitle">Please enter your email</p>
+                        <form action="../includes/otp.php" method="POST">
                             <div class="mb-3 mt-5">
-                                <label for="email" class="form-label">Email address</label>
-                                <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" name="email" id="email" aria-describedby="profileNameHelp" require>
                             </div>
-                            <div class="mb-1">
-                                <label for="pword" class="form-label">Password</label>
-                                <input type="password" class="form-control" name="pword" id="pword">
-                            </div>
-                            <div class="mb-3 d-flex justify-content-end">
-                                <a href="password_recovery.php">Forgot Password</a>
-                            </div>
-
-                            <div class="d-flex justify-content-end">
-                                <button class="btn btn-hive" type="submit" name="login">LOG IN</button>
+                            <div class="d-flex justify-content-end mt-5">
+                                <button class="btn btn-hive" type="submit" name="btncode">Send Code</button>
                             </div>
                         </form>
                     </div>

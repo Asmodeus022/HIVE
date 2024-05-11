@@ -2,7 +2,7 @@
     session_start();
 
     if (!isset($_SESSION['email']) && !isset($_SESSION['password'])) {
-        header("Location: page/login.html");
+        header("Location: page/login.php");
         exit;
     }
 

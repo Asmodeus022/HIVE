@@ -5,17 +5,17 @@
     function authenticateUser($email, $pword)
     {
         global $conn;
-        $stmt = $conn->prepare("SELECT `Email`, `Password` FROM `account` WHERE `Email` = ?");
+        $stmt = $conn->prepare("SELECT `email`, `pword` FROM `managers` WHERE `email` = ?");
         $stmt->bind_param("s", $email);
         $stmt->execute();
         $result = $stmt->get_result();
 
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
-            $email = $row['Email'];
-            $password = $row['Password'];
+            $email = $row['email'];
+            $password = $row['pword'];
 
-            if ($pword == $password) {
+            if (md5($pword) == $password) {
                 $_SESSION['email'] = $email;
                 $_SESSION['password'] = $password;
                 header("Location: ../page/dashboard.php");
