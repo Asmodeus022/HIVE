@@ -1,0 +1,88 @@
+/* * {
+    border: 1px dotted red;
+} */
+
+.modal {
+    padding: 2rem 0;
+}
+
+.modal_container {
+    background-color: var(--white);
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    height: 100%;
+    border-radius: 1rem;
+}
+
+
+input:focus {
+    outline: none;
+    border: 0;
+}
+
+input[type="text"], input[type="number"] {
+    outline: none;
+    border: 0;
+    width: 100%;
+    height: 2.5rem;
+    background-color: var(--whitebg);
+    height: 4rem;
+    border-radius: 0.25rem;
+
+}
+
+.title {
+    margin-bottom: 2rem;
+}
+label {
+    color: var(--lightgrey);
+}
+
+.product_info {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 2rem;
+}
+
+.product_info input {
+    margin-bottom: 1rem;
+}
+
+.file {
+    margin-bottom: 1rem;
+}
+
+.upper input{
+    margin-bottom: 1rem;
+}
+
+.cancel {
+    background-color: var(--white);
+    border: 2px solid var(--black);
+    padding: auto;
+    padding: 1rem 0;
+    width: 19.5rem;
+    text-align: center;
+    border-radius: 0.5rem;
+}
+
+.add {
+    
+    border: 2px solid var(--brand);
+    padding: auto;
+    padding: 1rem 0;
+    width: 19.5rem;
+    text-align: center;
+    background-color: var(--brand);
+    color: var(--white);
+    border-radius: 0.5rem;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+
+}

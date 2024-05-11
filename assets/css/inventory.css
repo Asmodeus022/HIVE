@@ -1,0 +1,331 @@
+/* * {
+    border: 1px dotted red;
+} */
+
+.middle {
+    height: 100vh;
+    padding-top: 3.25rem;
+    padding-left: 2rem;
+    padding-bottom: 2rem;
+
+}
+
+.middle_content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.search_bar {
+    background-color: var(--white);
+    width: 100%;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    margin-top: 1.5rem;
+
+}
+.search_bar form {
+    width: 100%;
+}
+
+.search_bar input {
+    width: auto;
+
+}
+
+.search_bar span {
+    margin-right: 1.25rem;
+    color: var(--lightgrey);
+}
+
+input:focus {
+    outline: none;
+    border: 0;
+}
+
+input[type="text"] {
+    outline: none;
+    border: 0;
+    width: 100%;
+    height: auto;
+
+}
+
+
+.overview {
+    padding: 1rem;
+    background-color: var(--white);
+    border-radius: 1rem;
+}
+
+.overview * h5, h6 {
+    color: var(--lightgrey);
+}
+
+.overview .title {
+    margin-bottom: 1.5rem;
+}
+
+.stocks {
+    display: flex;
+    margin-bottom: 2rem;
+}
+
+.stocks h6 {
+    margin-bottom: 1rem;
+}
+
+.stocks * {
+    width: 100%;
+}
+
+.overview h1 {
+    text-align: center;
+    line-height: 8rem;
+    margin: 1.5rem 0
+}
+
+.demand_forecast {
+    margin-bottom: auto;
+}
+
+.reorder_point {
+    margin-bottom: auto;
+}
+
+/* RIGHT */
+
+.right {
+    padding: 2rem 0;
+    padding-left: 2rem;
+    padding-right: 1rem;
+}
+.right .container {
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    background-color: var(--white);
+    border-radius: 1rem;
+    
+    
+}
+
+.top {
+    background-color: var(--white);
+    display: flex;
+    color: var(--lightgrey);
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.top * {
+    background-color: var(--whitebg);
+    text-align: center;
+    height: 2.5rem;
+    align-items: center;
+    padding: auto;
+    line-height: auto;
+    vertical-align: middle;
+    border-radius: 0.25rem;
+}
+
+.top div {
+    vertical-align: middle;
+    padding: auto;
+    top: 50%;
+    width: 10rem;
+}
+
+.top div h6 {
+    height: 1rem;
+    margin: 0.75rem;
+    
+}
+
+/* .top * {
+    background-color: var(--whitebg);
+} */
+
+.labels {
+    display: flex;
+    text-align: center;
+    border-bottom: 1px solid var(--lightgrey);
+}
+
+.label:first-child {
+    width: 2rem;
+    margin-right: 6.5rem;
+}
+
+.label:nth-child(2) {
+    width: 6.5rem;
+    margin-right: 1.625rem;
+}
+
+.label:nth-child(3) {
+    width: 16.25rem;
+    margin-right: 1.625rem;
+}
+
+.label:nth-child(4) {
+    width: 6.5rem;
+    margin-right: 0rem;
+}
+
+.label:nth-child(5) {
+    width: 6.5rem;
+    margin-right: 0rem;
+}
+
+
+.label:nth-child(6) {
+    width: 4.875rem;
+    margin-right: 0rem;
+}
+
+.inventory {
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 44rem;
+    
+}
+
+.item_container {
+    width: 100%;
+}
+
+.item {
+    height: 7.5rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--lightgrey);
+
+}
+
+
+
+.item img {
+    height: 4.5rem;
+    width: 4.5rem;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+}
+
+.item h5 {
+    height: auto;
+    text-align: center;
+}
+
+.inventory input[type=radio] {
+    width: 1rem;
+    height: 1rem;
+    color: var(--black);
+}
+
+.item1:first-child {
+    width: 2rem;
+    margin-right: 1rem;
+    display: flex;
+    padding: auto;
+}
+
+.item1:first-child span {
+    width: 2rem;
+    height: 2rem;
+    margin-right: 1rem;
+}
+
+.item1:first-child span:hover {
+    color: var(--brand);
+}
+
+.item1:nth-child(2){
+    width: 4.5rem;
+    height: 4.5rem;
+    margin-right: 1rem;
+}
+
+.item1:nth-child(3) {
+    width: 6.5rem;
+    margin-right: 1.625rem;
+}
+
+.item1:nth-child(4) {
+    width: 16.25rem;
+    margin-right: 1.625rem;
+}
+
+.item1:nth-child(5) {
+    width: 6.5rem;
+    margin-right: 0rem;
+}
+
+.item1:nth-child(6) {
+    width: 6.5rem;
+    margin-right: 0rem;
+}
+
+
+.item1:nth-child(7) {
+    width: 4.875rem;
+    margin-right: 0rem;
+}
+
+.item1:nth-child(8) {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-left: 1rem;
+    background-color: var(--brand);
+    border-radius: 0.25rem;
+    align-items: center;
+}
+
+.item1:nth-child(8) span {
+    width: 1rem;
+    height: 1rem;
+    color: var(--white);
+}
+
+.add {
+    background-color: var(--brand);
+}
+
+.add h6 {
+    background-color: var(--brand);
+    color: var(--white);
+}
+
+
+/* ADD ITEM MODAL */
+
+.modal {
+    background-color: white;
+   /*  display: flex; */
+    padding: 1.5rem;
+    justify-content: center;
+
+    translate: 50% 20%;
+}
+
+.product_info {
+    display: flex;
+    flex-direction: row;
+}
+
+.product_info div {
+    width: 100%;
+}
+
+label {
+    width: 100%;
+}
+
+.right .container .top a {
+    margin-top: 0rem;
+}

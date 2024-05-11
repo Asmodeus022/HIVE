@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css_reset.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="inventory.css">
+    <link rel="stylesheet" href="pos_nav.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,300,0,0" />
+</head>
+<body>
+    <script>
+        const modal = document.querySelector('.modal');
+        const openModal = document.querySelector('add');
+        const closeModal = document.querySelector
+    </script>
+
+    <!-- <dialog open class="modal col-6" id="modal">
+        <form action="php_functions/add_product.php" method="post">
+
+            <div class="">
+                <h4>Add item</h4>
+                <div class="btn">
+                    <span class="material-symbols-rounded">
+                        close
+                    </span>
+                </div>
+            </div>
+
+            <div>
+                <input type="file" accept="image/png, image/jpeg, image/jpg" name="product_image" class="inputfile">
+                <label for="product_images"></label>
+            </div>
+            <div>
+
+
+
+                <div>
+                    <label for="product_name"><h6>Product Name</h6></label>
+                    <input type="text" name="product_name" id="">
+                </div>
+
+                <div>
+                    <label for=""><h6>Category</h6></label>
+                    <input type="text" name="product_category">
+                </div>
+
+                <div class="product_info">
+                    <div>
+                        <label for=""><h6>Product ID</h6></label>
+                        <input type="text" name="product_id">
+                    </div>
+
+                    <div>
+                        <label for=""><h6>Brand</h6></label>
+                        <input type="text" name="product_brand">
+                    </div>
+
+                    <div>
+                        <label for=""><h6>Price</h6></label>
+                        <input type="text" name="product_price">
+                    </div>
+
+                </div>
+
+                <div class="product_info">
+                    <div>
+                        <label for=""><h6>Quantity</h6></label>
+                        <input type="text" name="product_quantity">
+                    </div>
+
+                    <div>
+                        <label for=""><h6>Daily Average Sale</h6></label>
+                        <input type="text" name="product_average_sale">
+                    </div>
+
+                    <div>
+                        <label for=""><h6>Product Reorder Point</h6></label>
+                        <input type="text" name="product_reorder_point">
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div>
+                <button type="submit" class="btn"><h5>Cancel</h5></button>
+                <button type="submit" class="btn"><h5>Add Item</h5></button>
+            </div>
+        </form>
+
+    </dialog> -->
+    
+
+    <div class="row">
+        <div class="col-1 left">
+            <div class="logo">
+                <img src="HIVE SVG BRAND.svg" alt="">
+            </div>
+
+            <div class="nav">
+                <div class="nav_links">
+                    <span class="material-symbols-rounded">
+                        dashboard
+                    </span>
+                    <span class="material-symbols-rounded">
+                        shopping_bag
+                    </span>
+                    <span class="material-symbols-rounded">
+                        inventory_2
+                    </span>
+                    <span class="material-symbols-rounded">
+                        handshake
+                    </span>
+                    <span class="material-symbols-rounded">
+                        contract
+                    </span>
+                    <span class="material-symbols-rounded">
+                        pie_chart
+                    </span>
+
+                    <span class="material-symbols-rounded">
+                        photo_auto_merge
+                    </span>
+                    <span class="material-symbols-rounded">
+                        brightness_4
+                    </span>
+                    <span class="material-symbols-rounded">
+                        account_circle
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- MIDDLE -->
+
+        <div class="col-3 middle">
+            <div class="middle_content">
+                <h3>Inventory</h3>
+
+                <div class="search_section">
+                    <h4>Search Items</h4>
+                    <div class="search_bar">
+                        <form action="">
+                            <input type="text" placeholder="Search item...">
+                            <input type="submit" hidden> 
+                        </form>
+                        <span class="material-symbols-rounded">
+                            search
+                        </span>
+                    </div>
+                </div>
+
+                <div class="overview">
+                    <div class="title">
+                        <h4>Overview</h4>
+                    </div>
+
+                    <div class="stocks">
+                        <div class="sold">
+                            <h6>Sold</h6>
+                            <h5>1230</h5>
+                        </div>
+                        <div class="available">
+                            <h6>Available</h6>
+                            <h5>1324</h5>
+                        </div>
+                    </div>
+
+                    <div class="demand_forecast">
+                        <h6>Daily Demand Forecast</h6>
+                        <h1>41</h1>
+                    </div>
+
+                    <div class="reorder_point">
+                        <h6>Item Reorder Point</h6>
+                        <h1>615</h1>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-8 right">
+            <div class="container">
+                <div class="top">
+                    <div class="col"><h6>Category</h6></div>
+                    <div class="col"><h6>Brand</h6></div>
+                    <div class="col"><h6>Sort by</h6></div>
+                    <div class="col"><h6>Store</h6></div>
+                    <a href="add_item_page.php">
+                        <div class="col btn add">
+                            <h6>Add Item</h6>
+                        </div>
+                    </a>
+
+                </div>
+                <div class="labels">
+                    <div class="label"><h6>#</h6></div>
+                    <div class="label"><h6>Product ID</h6></div>
+                    <div class="label"><h6>Product Name</h6></div>
+                    <div class="label"><h6>Brand</h6></div>
+                    <div class="label"><h6>Price</h6></div>
+                    <div class="label"><h6>Stocks</h6></div>
+                </div>
+                
+                <div class="inventory">
+                    <div class="item_container">
+                        <form action="">
+                            
+                            <div class="item">
+                                <div class="item1 btn">
+                                    <span class="material-symbols-rounded">
+                                        radio_button_checked
+                                    </span>
+                                </div>
+                                <div class="item1"><img src="../products/black_1.png" alt=""></div>
+                                <div class="item1"><h5>HC1</h5></div>
+                                <div class="item1"><h5>Cafe Noir - Arabica</h5></div>
+                                <div class="item1"><h5>HoneyCoffee</h5></div>
+                                <div class="item1"><h5>500.00</h5></div>
+                                <div class="item1"><h5>1324</h5></div>
+                                <div class="item1 btn">
+                                    <span class="material-symbols-rounded">
+                                    delete
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="item">
+                                <div class="item1 btn">
+                                    <span class="material-symbols-rounded">
+                                        radio_button_checked
+                                    </span>
+                                </div>
+                                <div class="item1"><img src="../products/latte_2.png" alt=""></div>
+                                <div class="item1"><h5>HC2</h5></div>
+                                <div class="item1"><h5>Latte - Robusta</h5></div>
+                                <div class="item1"><h5>HoneyCoffee</h5></div>
+                                <div class="item1"><h5>500.00</h5></div>
+                                <div class="item1"><h5>792</h5></div>
+                                <div class="item1 btn">
+                                    <span class="material-symbols-rounded">
+                                    delete
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="item">
+                                <div class="item1 btn">
+                                    <span class="material-symbols-rounded">
+                                        radio_button_checked
+                                    </span>
+                                </div>
+                                <div class="item1"><img src="../products/cappuccino_3.png" alt=""></div>
+                                <div class="item1"><h5>HC3</h5></div>
+                                <div class="item1"><h5>Cappuccino - Robusta</h5></div>
+                                <div class="item1"><h5>HoneyCoffee</h5></div>
+                                <div class="item1"><h5>500.00</h5></div>
+                                <div class="item1"><h5>217</h5></div>
+                                <div class="item1 btn">
+                                    <span class="material-symbols-rounded">
+                                    delete
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="item">
+                                <div class="item1 btn">
+                                    <span class="material-symbols-rounded">
+                                        radio_button_checked
+                                    </span>
+                                </div>
+                                <div class="item1"><img src="../products/americano_4.png" alt=""></div>
+                                <div class="item1"><h5>HC4</h5></div>
+                                <div class="item1"><h5>Americano - Robusta</h5></div>
+                                <div class="item1"><h5>HoneyCoffee</h5></div>
+                                <div class="item1"><h5>500.00</h5></div>
+                                <div class="item1"><h5>123</h5></div>
+                                <div class="item1 btn">
+                                    <span class="material-symbols-rounded">
+                                    delete
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="item">
+                                <div class="item1 btn">
+                                    <span class="material-symbols-rounded">
+                                        radio_button_checked
+                                    </span>
+                                </div>
+                                <div class="item1"><img src="../products/espresso_5.png" alt=""></div>
+                                <div class="item1"><h5>HC5</h5></div>
+                                <div class="item1"><h5>Espresso - Robusta</h5></div>
+                                <div class="item1"><h5>HoneyCoffee</h5></div>
+                                <div class="item1"><h5>500.00</h5></div>
+                                <div class="item1"><h5>345</h5></div>
+                                <div class="item1 btn">
+                                    <span class="material-symbols-rounded">
+                                    delete
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="item">
+                                <div class="item1 btn">
+                                    <span class="material-symbols-rounded">
+                                        radio_button_checked
+                                    </span>
+                                </div>
+                                <div class="item1"><img src="../products/doppio_6.png" alt=""></div>
+                                <div class="item1"><h5>HC6</h5></div>
+                                <div class="item1"><h5>Doppio - Robusta</h5></div>
+                                <div class="item1"><h5>HoneyCoffee</h5></div>
+                                <div class="item1"><h5>500.00</h5></div>
+                                <div class="item1"><h5>777</h5></div>
+                                <div class="item1 btn">
+                                    <span class="material-symbols-rounded">
+                                    delete
+                                    </span>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+
+        </div>
+
+    </div>
+    
+</body>
+</html>

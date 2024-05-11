@@ -1,0 +1,61 @@
+.left {
+    height: 100vh;
+}
+
+.right {
+    height: auto;
+}
+
+.login_btn {
+    display: flex;
+    height: 1rem;
+    font-weight: 700; 
+    margin-top: 1.5rem;
+    margin-right: 2rem;
+    margin-bottom: 5.25rem;
+    margin-left: 0;
+    float: right;
+}
+
+.form_container {
+    display: inline-block;
+    width: 100%;
+    padding: 0 16.66%;
+}
+
+.subtitle {
+    margin-bottom: 5rem;
+    font-weight: 400;
+    color: var(--lightgrey);
+}
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1rem;
+}
+
+input {
+    margin-bottom: 1.5rem;
+}
+
+.logotype {
+    position: fixed;
+    top: 1rem;
+    left: 2rem;
+    color: var(--white);
+}
+
+.next{
+    border-radius: 0.5rem;
+    color: var(--white);
+    padding: auto;
+    width: 15rem;
+    height: 3rem;
+    text-align: center;
+    background-color: var(--brand);
+    float: right;
+    margin-top: 1.5rem;
+    margin-bottom: 7.75rem;
+}
