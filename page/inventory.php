@@ -12,7 +12,7 @@
             <?php include '../components/sidebar.php'; ?>
         </div>
         <div class="col">
-            <div class="row p-4 h-100">
+            <div class="row p-3 h-100">
                 <div class="col-3">
                     <h3 class=" mb-4">Inventory</h3>
                     <div class="my-3">

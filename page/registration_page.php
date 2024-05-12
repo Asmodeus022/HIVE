@@ -22,7 +22,7 @@ function register($companyname, $location, $businesscategory, $businesssize, $em
     }else{
         $otp='0';
         $hashpass=md5($pword);
-        $sql = ("INSERT INTO managers(company_name, `location`,business_category, business_size,email, pword , otp) VALUES('$companyname','$location','$businesscategory','$businesssize','$email','$hashpass','$otp')");
+        $sql = ("INSERT INTO managers(`company_name`, `location`,`category`, `business_size`,email, `password` , otp) VALUES('$companyname','$location','$businesscategory','$businesssize','$email','$hashpass','$otp')");
         $result = $conn->query($sql);
         if($result === TRUE){
             echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
@@ -80,7 +80,7 @@ if(isset($_POST['btnenter'])){
                     <div class="w-100 mb-5" style="max-width: 80%">
                         <h2 class="title">Welcome to the Hives!</h2>
                         <p class="subtitle">Please create a profile</p>
-                        <form action="regverification_page.php" method="POST">
+                        <form action="" method="POST">
                             <div class="container d-flex justify-content-center align-items-center">
                                 <div class="profile-pic">
                                 <img

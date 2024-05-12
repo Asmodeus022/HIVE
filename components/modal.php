@@ -22,15 +22,15 @@
                 <button type="button" class="btn-close me-1" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="" method="POST" onsubmit="return validateForm()">
+                <form action="../components/forms/prodAddForm.php" method="POST" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-5">
-                            <input type="file" class="form-control file-upload" name="fileUpload" id="fileUpload" accept="image/*">
+                            <input type="file" class="form-control file-upload" name="product_image" id="product_image" accept="image/*">
                         </div>
                         <div class="col-6">
                             <div class="mb-3">
                                 <label for="productName" class="form-label">Product Name</label>
-                                <input type="text" class="form-control" name="productName" id="productName" placeholder="">
+                                <input type="text" class="form-control" name="productName" id="productName" placeholder="" required>
                             </div>
                             <div id="error-pName-message" style="color: red;"></div>
 
@@ -42,7 +42,7 @@
                                 <div class="col-4">
                                     <div class="mb-3">
                                         <label for="product_id" class="form-label">Product ID</label>
-                                        <input type="text" class="form-control" name="product_id" id="product_id" placeholder="">
+                                        <input type="text" class="form-control" name="product_id" id="product_id" placeholder="" required>
                                     </div>
                                     <div id="error-pId-message" style="color: red;"></div>
                                 </div>
@@ -55,7 +55,7 @@
                                 <div class="col-4">
                                     <div class="mb-3">
                                         <label for="price" class="form-label">Price</label>
-                                        <input type="number" class="form-control" name="price" id="price" placeholder="">
+                                        <input type="number" class="form-control" name="price" id="price" placeholder="" required>
                                     </div>
                                     <div id="error-price-message" style="color: red;"></div>
                                 </div>
@@ -84,7 +84,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Add</button>
+                        <button type="submit" class="btn btn-primary" name="add_product">Add</button>
                     </div>
                 </form>
             </div>
@@ -93,37 +93,37 @@
 </div>
 
 <script>
-    function validateForm() {
-        var productName = document.getElementById("productName").value;
-        var productId = document.getElementById("product_id").value;
-        var price = document.getElementById("price").value;
+    // function validateForm() {
+    //     var productName = document.getElementById("productName").value;
+    //     var productId = document.getElementById("product_id").value;
+    //     var price = document.getElementById("price").value;
 
-        var isValid = true;
+    //     var isValid = true;
 
-        if (productName.trim() === "") {
-            var errorPNameMessage = "Product Name is required.<br>";
-            document.getElementById("error-pName-message").innerHTML = errorPNameMessage;
-            isValid = false;
-        } else {
-            document.getElementById("error-pName-message").innerHTML = "";
-        }
-        if (productId.trim() === "") {
-            var errorPIdMessage = "Product ID is required.<br>";
-            document.getElementById("error-pId-message").innerHTML = errorPIdMessage;
-            isValid = false;
-        } else {
-            document.getElementById("error-pId-message").innerHTML = "";
-        }
-        if (price.trim() === "") {
-            var errorPPriceMessage = "Price is required.<br>";
-            document.getElementById("error-price-message").innerHTML = errorPPriceMessage;
-            isValid = false;
-        } else {
-            document.getElementById("error-price-message").innerHTML = "";
-        }
+    //     if (productName.trim() === "") {
+    //         var errorPNameMessage = "Product Name is required.<br>";
+    //         document.getElementById("error-pName-message").innerHTML = errorPNameMessage;
+    //         isValid = false;
+    //     } else {
+    //         document.getElementById("error-pName-message").innerHTML = "";
+    //     }
+    //     if (productId.trim() === "") {
+    //         var errorPIdMessage = "Product ID is required.<br>";
+    //         document.getElementById("error-pId-message").innerHTML = errorPIdMessage;
+    //         isValid = false;
+    //     } else {
+    //         document.getElementById("error-pId-message").innerHTML = "";
+    //     }
+    //     if (price.trim() === "") {
+    //         var errorPPriceMessage = "Price is required.<br>";
+    //         document.getElementById("error-price-message").innerHTML = errorPPriceMessage;
+    //         isValid = false;
+    //     } else {
+    //         document.getElementById("error-price-message").innerHTML = "";
+    //     }
 
-        return isValid;
-    }
+    //     return isValid;
+    // }
 </script>
 </body>
 </html>

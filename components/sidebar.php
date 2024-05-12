@@ -12,7 +12,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <?php echo ($_SERVER['REQUEST_URI'] == '/shopping.php') ? 'active' : ''; ?> p-2" href="./dashboard.php">
+                <a class="nav-link <?php echo ($_SERVER['REQUEST_URI'] == '/shopping.php') ? 'active' : ''; ?> p-2" href="./shopping.php">
                     <img src="http://127.0.0.1:5500/assets/images/shopping.svg" style="width: 40px; height: 40px;" alt="">
                 </a>
             </li>
