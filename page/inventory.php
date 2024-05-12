@@ -2,7 +2,8 @@
     @include "./cross_access.php";
     @include "../includes/database.php";
     @include "../includes/header.php";
-    @include "../components/modal.php";
+    @include "../components/add_modal.php";
+    @include "../components/update_modal.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,7 +51,7 @@
                             <button type="button" class="btn btn-hive" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Add Item</button>
                         </div>
                         <div class="p-2">
-                            <table id="myTable" class="hover table table-striped" style="width: 100%">
+                            <table id="myTable" class="hover table table-striped text-center" style="width: 100%">
                                 <thead>
                                     <tr>
                                         <th></th>
@@ -59,6 +60,7 @@
                                         <th>Brand</th>
                                         <th>Price</th>
                                         <th>Stocks</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -76,6 +78,29 @@
                                                 echo "<td>{$row['Brand']}</td>";
                                                 echo "<td>{$row['Price']}</td>";
                                                 echo "<td>{$row['Stocks']}</td>";
+                                                // echo "<td>
+                                                //             <button type=\"button\"
+                                                //             class=\"btn btn-hive update-btn\"
+                                                //             data-bs-toggle=\"modal\"
+                                                //             data-bs-target=\"#staticBackdrop_update\"
+                                                //             data-product-id=\"" . $row['Id'] . "\">Update
+                                                //             </button>
+                                                //         </td>";
+                                                echo "<td>
+                                                            <button type=\"button\"
+                                                            class=\"btn btn-hive update-btn\" 
+                                                            data-bs-toggle=\"modal\"
+                                                            data-bs-target=\"#staticBackdrop_update\"
+                                                            data-product-id=\"{$row['Id']}\"
+                                                            data-product-name=\"{$row['Name']}\"
+                                                            data-category=\"{$row['Category']}\"
+                                                            data-brand=\"{$row['Brand']}\"
+                                                            data-price=\"{$row['Price']}\"
+                                                            data-quantity=\"{$row['Stocks']}\"
+                                                            data-daily-ave=\"{$row['Daily_Ave']}\"
+                                                            data-render-point=\"{$row['Render_Point']}\">Update</button>
+                                                    </td>";
+
                                                 echo "</tr>";
                                             }
                                         } else {
@@ -98,5 +123,35 @@
     <script src="https://cdn.datatables.net/select/2.0.2/js/select.dataTables.js"></script>
     <script src="https://cdn.datatables.net/select/2.0.2/js/dataTables.select.js"></script>
     <script src="../assets/js/inventory.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(document).on('click', '.update-btn', function() {
+                // Extract product information from data attributes
+                var productId = $(this).data('product-id');
+                var productName = $(this).data('product-name');
+                var category = $(this).data('category');
+                var brand = $(this).data('brand');
+                var price = $(this).data('price');
+                var quantity = $(this).data('quantity');
+                var dailyAve = $(this).data('daily-ave');
+                var renderPoint = $(this).data('render-point');
+                console.log(productName)
+
+                // Set values of input fields in the update modal
+                $('#productName_update').val(productName);
+                $('#category_update').val(category);
+                $('#product_id_update').val(productId);
+                $('#brand_update').val(brand);
+                $('#price_update').val(price);
+                $('#quantity_update').val(quantity);
+                $('#daily_ave_update').val(dailyAve);
+                $('#render_point_update').val(renderPoint);
+
+                // Show the update modal
+                $('#staticBackdrop_update').modal('show');
+            });
+        });
+        </script>
+
 </body>
 </html>
