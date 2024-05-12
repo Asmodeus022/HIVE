@@ -1,6 +1,8 @@
 <?php 
+    @include "./cross_access.php";
     @include "../includes/database.php";
     @include "../includes/header.php";
+    @include "../components/modal.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,7 +35,7 @@
                         <div class="d-flex flex-column h-75">
                             <p class="">Daily Demand Forecast</p>
                             <div class="col d-flex justify-content-center align-items-center">
-                                <h2 class="">0</h2>
+                                <h2 class="" id="dailyAverageSale">0</h2>
                             </div>
                             <p class="">Item Reorder Point</p>
                             <div class="col d-flex justify-content-center align-items-center">
@@ -44,12 +46,15 @@
                 </div>
                 <div class="col ps-4">
                     <div class="h-100 border rounded-3" style="background-color: white">
-                        <h3 class="">Inventory</h3>
+                        <div class="mt-3 me-3 d-flex justify-content-end">
+                            <button type="button" class="btn btn-hive" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Add Item</button>
+                        </div>
                         <div class="p-2">
                             <table id="myTable" class="hover table table-striped" style="width: 100%">
                                 <thead>
                                     <tr>
                                         <th></th>
+                                        <th>Product Id</th>
                                         <th>Product Name</th>
                                         <th>Brand</th>
                                         <th>Price</th>
@@ -66,6 +71,7 @@
                                             while($row = mysqli_fetch_assoc($result)) {
                                                 echo "<tr>";
                                                 echo "<td></td>";
+                                                echo "<td>{$row['Id']}</td>";
                                                 echo "<td>{$row['Name']}</td>";
                                                 echo "<td>{$row['Brand']}</td>";
                                                 echo "<td>{$row['Price']}</td>";

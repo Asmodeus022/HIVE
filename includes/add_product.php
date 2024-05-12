@@ -1,5 +1,5 @@
 <?php
-@include 'db_connection.php';
+@include 'database.php';
 
 if(isset($_POST['add_product'])){
     $product_name = $_POST['product_name'];
@@ -14,11 +14,7 @@ if(isset($_POST['add_product'])){
     $product_image_tmp_name = $_FILES['product_image']['tmp_name'];
     $product_image_folder = 'uploaded_img/'.$product_image;
 
-    if(empty($product_name) || empty($product_category) || empty($product_brand) || empty($product_price) || empty($product_quantity) || empty($product_average_sale) || empty($product_reorder_point) || empty($product_image)) {
-        // Handle empty fields
-    }
-    else {
-        $insert = "INSERT INTO inventory(product_name, product_category, product_brand, product_price, product_quantity, product_average_sale, product_reorder_point, product_image) VALUES('$product_name', '$product_category', '$product_brand', '$product_price', '$product_quantity', '$product_average_sale', '$product_reorder_point', '$product_image')";
+    $insert = "INSERT INTO products(product_name, product_category, product_brand, product_price, product_quantity, product_average_sale, product_reorder_point, product_image) VALUES('$product_name', '$product_category', '$product_brand', '$product_price', '$product_quantity', '$product_average_sale', '$product_reorder_point', '$product_image')";
 
         $upload = mysqli_query($conn, $insert);
         if($upload) {
@@ -28,6 +24,12 @@ if(isset($_POST['add_product'])){
             // Error in SQL query
             echo mysqli_error($conn);
         }
-    }
+
+    // if(empty($product_name) || empty($product_category) || empty($product_brand) || empty($product_price) || empty($product_quantity) || empty($product_average_sale) || empty($product_reorder_point) || empty($product_image)) {
+    //     // Handle empty fields
+    // }
+    // else {
+        
+    // }
 }
 ?>
