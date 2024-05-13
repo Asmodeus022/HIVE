@@ -11,7 +11,7 @@
     </head>
     <body>
         <?php
-            include "../includes/loginHandler.php";
+            include "../includes/loginEmployeeHandler.php";
         
         ?>
         <div class="row p-0 m-0" style="height: 100vh">
@@ -27,25 +27,20 @@
             <div class="col-7 p-0 h-100">
                 <div class="h-100 w-100 d-flex justify-content-center align-items-center">
                     <div class="w-100" style="max-width: 80%">
-                        <h2 class="title">Welcome back!</h2>
+                        <h2 class="title">Welcome Employee!</h2>
                         <p class="subtitle">Please log into your account.</p>
                         <form action="" method="POST">
                             <div class="mb-3 mt-5">
-                                <label for="email" class="form-label">Email address</label>
-                                <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp">
+                                <label for="username" class="form-label">Username</label>
+                                <input type="text" class="form-control" name="username" id="username">
                             </div>
                             <div class="mb-1">
                                 <label for="pword" class="form-label">Password</label>
                                 <input type="password" class="form-control" name="pword" id="pword">
                             </div>
-                            <div class="mb-3 d-flex justify-content-between">
-                                <a href="registration_page.php">Ceate Account</a>
-                                <a href="password_recovery.php">Forgot Password</a>
-                            </div>
-                            <a href="loginEmployee.php">Login as employee</a>
 
                             <div class="d-flex justify-content-end">
-                                <button class="btn btn-hive" type="submit" name="login">LOG IN</button>
+                                <button class="btn btn-hive" type="submit" name="loginUser">LOG IN</button>
                             </div>
                         </form>
                     </div>

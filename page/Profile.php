@@ -34,7 +34,7 @@
 
                         <div class='d-flex justify-content-end mt-5'>
                             <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary addEmployee">Add</button>
+                            <button type="submit" class="btn btn-primary">Add</button>
                         </div>
                     </form>
                 </div>
@@ -60,17 +60,17 @@
                             <label for="password" class="form-label">Password</label>
                             <input type="password" class="form-control" name='updatePassword' id="updatePassword" placeholder="Set new password" required>
                         </div>
-                        <select class="form-select" name="employeeRole" id="updateEmployeeRole" aria-label="Default select example" required>
+                        <select class="form-select" name="updateEmployeeRole" id="updateEmployeeRole" aria-label="Default select example" required>
                             <option selected>Select Role</option>
                             <option value="CASHIER">Cashier</option>
                             <option value="SALES_STAFF">Sales Staff</option>
                             <option value="MARKETING_STAFF">Marketing Staff</option>
                             <option value="SOCIAL_MEDIA_MANAGER">Social Media Manager</option>
                         </select>
-
+                        <input type='hidden' name="selectedEmployeeId" id="selectedEmployeeId">
                         <div class='d-flex justify-content-end mt-5'>
                             <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary addEmployee">Add</button>
+                            <button type="submit" class="btn btn-primary">Update</button>
                         </div>
                     </form>
                 </div>
@@ -149,7 +149,7 @@
                                     echo "<td>" . $employee['Added_Date'] . "</td>";
                                     echo "<td>
                                             <div class='d-flex justify-content-center'>
-                                                <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#updateEmployee' data-username='" . $employee['Username'] . "' data-role='" . $employee['Role'] . "'>Edit</button>
+                                                <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#updateEmployee' data-employeeid='" . $employee['Id'] . "'  data-username='" . $employee['Username'] . "' data-role='" . $employee['Role'] . "'>Edit</button>
                                                 <button class='btn btn-danger'>Delete</button>
                                             </div>
                                         </td>";

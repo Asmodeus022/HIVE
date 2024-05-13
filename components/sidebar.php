@@ -22,7 +22,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <?php echo ($_SERVER['REQUEST_URI'] == '/people.php') ? 'active' : ''; ?> p-2" href="./company.php">
+                <a class="nav-link <?php echo ($_SERVER['REQUEST_URI'] == '/company.php') ? 'active' : ''; ?> p-2" href="./company.php">
                     <img src="http://127.0.0.1:5500/assets/images/handshake.svg" style="width: 40px; height: 40px;" alt="">
                 </a>
             </li>
@@ -36,9 +36,20 @@
                     <img src="http://127.0.0.1:5500/assets/images/chart.svg" style="width: 40px; height: 40px;" alt="">
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link <?php echo ($_SERVER['REQUEST_URI'] == '/soc_med.php') ? 'active' : ''; ?> p-2" href="./soc_med.php">
+                    <img src="http://127.0.0.1:5500/assets/images/photo.svg" style="width: 40px; height: 40px;" alt="">
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link <?php echo ($_SERVER['REQUEST_URI'] == '/dark.php') ? 'active' : ''; ?> p-2" href="./dark.php">
+                    <img src="http://127.0.0.1:5500/assets/images/mode.svg" style="width: 40px; height: 40px;" alt="">
+                </a>
+            </li>
         </ul>
-
+        
         <div class="btn-group dropup position-absolute bottom-0 start-50 translate-middle-x mb-3 z-3">
+        
             <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src="http://127.0.0.1:5500/assets/images/account.svg" style="width: 40px; height: 40px;" alt="">
             </button>

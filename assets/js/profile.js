@@ -18,20 +18,33 @@ $(document).ready(function(){
         });
     });
 
-
-
-
-
-
-
-
     $('#updateEmployee').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget); // Button that triggered the modal
-        var username = button.data('username'); // Extract username from data-username attribute
-        var role = button.data('role'); // Extract role from data-role attribute
+        var button = $(event.relatedTarget);
+        var employeeId = button.data('employeeid');
+        var username = button.data('username');
+        var role = button.data('role');
 
-        // Update modal fields with employee's current data
         $('#updateUsername').val(username);
         $('#updateEmployeeRole').val(role);
+        $('#selectedEmployeeId').val(employeeId);
+    });
+
+    $('#updateEmployeeForm').submit(function(e) {
+        e.preventDefault(); 
+
+        var formData = $(this).serialize();
+
+        $.ajax({
+            url: '../API/updateEmployee.php',
+            type: 'POST',
+            data: formData,
+            success: function(response) {
+                alert(response);
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+                alert('Error occurred. Please try again.');
+            }
+        });
     });
 });

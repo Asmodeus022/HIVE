@@ -11,7 +11,7 @@
     </head>
     <body>
         <?php
-            include "../includes/loginHandler.php";
+            include "../includes/loginEmployeeHandler.php";
         
         ?>
         <div class="row p-0 m-0" style="height: 100vh">
@@ -31,8 +31,8 @@
                         <p class="subtitle">Please log into your account.</p>
                         <form action="" method="POST">
                             <div class="mb-3 mt-5">
-                                <label for="email" class="form-label">Email address</label>
-                                <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp">
+                                <label for="username" class="form-label">Username</label>
+                                <input type="text" class="form-control" name="username" id="username" aria-describedby="emailHelp">
                             </div>
                             <div class="mb-1">
                                 <label for="pword" class="form-label">Password</label>
@@ -42,10 +42,9 @@
                                 <a href="registration_page.php">Ceate Account</a>
                                 <a href="password_recovery.php">Forgot Password</a>
                             </div>
-                            <a href="loginEmployee.php">Login as employee</a>
 
                             <div class="d-flex justify-content-end">
-                                <button class="btn btn-hive" type="submit" name="login">LOG IN</button>
+                                <button class="btn btn-hive" type="submit" name="loginUser">LOG IN</button>
                             </div>
                         </form>
                     </div>
