@@ -274,9 +274,15 @@
         $(document).ready(function(){
             $('.sendTo').click(function() {
                 var sharedWithId = $('.share-user').val();
+                var paymentMethod = $('input[name="payment"]:checked').val();
                 
                 if (!sharedWithId) {
                     alert('Please select a user to share the product with.');
+                    return;
+                }
+
+                if (!paymentMethod) {
+                    alert('Please select a payment method.');
                     return;
                 }
 

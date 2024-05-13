@@ -150,13 +150,13 @@
                                     echo "<td>
                                             <div class='d-flex justify-content-center'>
                                                 <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#updateEmployee' data-employeeid='" . $employee['Id'] . "'  data-username='" . $employee['Username'] . "' data-role='" . $employee['Role'] . "'>Edit</button>
-                                                <button class='btn btn-danger'>Delete</button>
+                                                <button type='button' class='btn btn-danger deleteEmployee' data-employeeid='" . $employee['Id'] . "'>Delete</button>
                                             </div>
                                         </td>";
                                     echo "</tr>";
                                 }
                             } else {
-                                echo "<tr><td colspan='4'>No employees found</td></tr>";
+                                echo "<tr><td colspan='12' class='text-center'>No employees found</td></tr>";
                             }
 ?>
                     </tbody>

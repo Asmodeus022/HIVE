@@ -49,4 +49,29 @@ $(document).ready(function(){
             }
         });
     });
+
+    $(document).on('click', '.deleteEmployee', function() {
+        var employeeId = $(this).data('employeeid');
+
+        if (confirm("Are you sure you want to delete this employee?")) {
+            $.ajax({
+                url: '../API/deleteEmployee.php',
+                type: 'POST',
+                data: { employeeId: employeeId },
+                success: function(response) {
+                    alert(response);
+                    location.reload();
+                    // if (response == "success") {
+                    //     $(this).closest('tr').remove();
+                    // } else {
+                    //     alert("Failed to delete employee.");
+                    // }
+                },
+                error: function() {
+                    // Show error message
+                    alert("An error occurred while processing your request.");
+                }
+            });
+        }
+    });
 });
