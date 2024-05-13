@@ -1,5 +1,4 @@
 <?php 
-    @include "./cross_access.php";
     @include "../includes/database.php";
     @include "../includes/header.php";
     @include "../components/modal.php";
@@ -54,6 +53,7 @@
                                 <thead>
                                     <tr>
                                         <th></th>
+                                        <th>Image</th>
                                         <th>Product Id</th>
                                         <th>Product Name</th>
                                         <th>Brand</th>
@@ -71,6 +71,7 @@
                                             while($row = mysqli_fetch_assoc($result)) {
                                                 echo "<tr>";
                                                 echo "<td></td>";
+                                                echo "<td><img src='../includes/phpupload/uploads/{$row['file_path']}' style='width: 100px; height: 100px;' alt='Image'></td>";
                                                 echo "<td>{$row['Id']}</td>";
                                                 echo "<td>{$row['Name']}</td>";
                                                 echo "<td>{$row['Brand']}</td>";
@@ -78,7 +79,8 @@
                                                 echo "<td>{$row['Stocks']}</td>";
                                                 echo "</tr>";
                                             }
-                                        } else {
+                                        }                                        
+                                         else {
                                             echo "<tr><td colspan='5'>No data found</td></tr>";
                                         }
                                     

@@ -42,7 +42,7 @@ if ( isset($_POST['add_product'])) {
         // File upload directory
         $targetDirectory = "../../includes/phpupload/uploads/";
         // File name
-        $targetFile = $targetDirectory . basename($_FILES["product_image"]["name"]);
+        $targetFile = basename($_FILES["product_image"]["name"]);
 
         // Attempt to move the file
         if (move_uploaded_file($_FILES["product_image"]["tmp_name"], $targetFile)) {

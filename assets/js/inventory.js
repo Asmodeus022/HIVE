@@ -18,7 +18,7 @@ $(document).ready(function () {
     table.on('select', function (e, dt, type, indexes) {
         var selectedRowData = table.rows(indexes).data().toArray();
         if (selectedRowData.length > 0) {
-            var productId = selectedRowData[0][1];
+            var productId = selectedRowData[0][2];
             
             $.ajax({
                 url: 'http://localhost/hive/includes/fetch_daily_average_sales.php',
