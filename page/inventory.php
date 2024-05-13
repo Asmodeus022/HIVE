@@ -40,7 +40,7 @@
                             </div>
                             <p class="">Item Reorder Point</p>
                             <div class="col d-flex justify-content-center align-items-center">
-                                <h2 class="">0</h2>
+                                <h2 class="" id="renderPoint">0</h2>
                             </div>
                         </div>
                     </div>    

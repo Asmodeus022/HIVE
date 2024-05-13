@@ -75,7 +75,7 @@
                                 </div>
                                 <div class="col-4">
                                     <div class="mb-3">
-                                        <label for="render_point" class="form-label">Render Point</label>
+                                        <label for="render_point" class="form-label">Reorder Point</label>
                                         <input type="number" class="form-control" name="render_point" id="render_point_update" placeholder="">
                                     </div>
                                 </div>

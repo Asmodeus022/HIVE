@@ -19,12 +19,19 @@ $(document).ready(function () {
                 data: { productId: productId },
                 dataType: 'json', 
                 success: function (response) {
-                    $('#dailyAverageSale').text(response);
+                    if ('error' in response) {
+                        console.error('Error fetching daily average sales data:', response.error);
+                    } else {
+                        
+                        $('#dailyAverageSale').text(response.Daily_Ave);
+                        $('#renderPoint').text(response.Daily_Ave * response.Render_Point);
+                    }
                 },
                 error: function (xhr, status, error) {
                     console.error('Error fetching daily average sales data:', error);
                 }
             });
+            
         }
     });
 
