@@ -32,7 +32,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <?php echo ($_SERVER['REQUEST_URI'] == '/records.php') ? 'active' : ''; ?> p-2" href="./dashboard.php">
+                <a class="nav-link <?php echo ($_SERVER['REQUEST_URI'] == '/records.php') ? 'active' : ''; ?> p-2" href="./analytics.php">
                     <img src="../assets/images/chart.svg" style="width: 40px; height: 40px;" alt="">
                 </a>
             </li>

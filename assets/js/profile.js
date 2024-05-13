@@ -10,6 +10,7 @@ $(document).ready(function(){
             data: formData,
             success: function(response) {
                 alert(response);
+                location.reload();
             },
             error: function(xhr, status, error) {
                 console.error(xhr.responseText);
@@ -40,6 +41,7 @@ $(document).ready(function(){
             data: formData,
             success: function(response) {
                 alert(response);
+                location.reload();
             },
             error: function(xhr, status, error) {
                 console.error(xhr.responseText);

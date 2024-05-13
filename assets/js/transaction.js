@@ -12,7 +12,6 @@ $(document).ready(function(){
                     var quantitiesArray = transaction.quantities.split(',');
 
                     for (var i = 0; i < itemsArray.length; i++) {
-                        // Format item with quantity as a box using flexbox
                         itemsHtml += '<div class="item-box d-flex justify-content-between">' + 
                                         '<p>'+ itemsArray[i] +'</p>' +
                                         '<p>'+ quantitiesArray[i] +' qty</p>' +

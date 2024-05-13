@@ -134,7 +134,6 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script>
         var selectedItems = [];
-        var totalAmount = 0;
 
         function addToSelectedItems(productId, productName, productCategory, productPrice, productImage) {
             console.log(productId);
@@ -179,7 +178,7 @@
         function updateSelectedItemsList() {
             var selectedItemsList = $('#selectedItemsList');
             selectedItemsList.empty();
-            
+            var totalAmount = 0;
             if (selectedItems.length > 0) {
                 selectedItems.forEach(function(item) {
                     var productPriceNumeric = parseFloat(item.price.replace(/[^\d.]/g, ''));
@@ -248,7 +247,9 @@
                 return;
             }
 
+            var totalAmount = selectedItems.reduce((total, item) => total + (parseFloat(item.price.replace(/[^\d.]/g, '')) * item.quantity), 0);
             console.log(totalAmount);
+
             $.ajax({
                 type: "POST",
                 url: "../components/forms/addTransaction.php",
@@ -280,17 +281,20 @@
                 }
 
                 var productIds = selectedItems.map(item => item.id);
+                var quantities = selectedItems.map(item => item.quantity);
 
                 $.ajax({
                     type: "POST",
                     url: "../includes/share_product.php",
                     data: {
+                        quantities: quantities,
                         sharedWithId: sharedWithId,
                         productIds: productIds
                     },
                     success: function(response) {
                         alert('Send successful!');
-                        location.reload();
+                        $('.addTransact').click(); 
+                        // location.reload();
                     },
                     error: function(xhr, status, error) {
                         console.error(xhr.responseText);

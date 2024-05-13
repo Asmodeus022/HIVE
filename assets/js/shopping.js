@@ -17,7 +17,7 @@ $(document).ready(function() {
                                     <p class='card-text card-category'>${product.Category}</p>
                                     <div class='d-flex justify-content-between'>
                                         <p class='card-text card-price'>₱ ${parseFloat(product.Price).toFixed(2)}</p>
-                                        <p>(${product.Stocks} left)</p>
+                                        <p>(${product.Quantity} left)</p>
                                     </div>
                                     <button class='btn btn-primary btn-sm addToCheckout'>Add to Checkout</button>
                                 </div>
