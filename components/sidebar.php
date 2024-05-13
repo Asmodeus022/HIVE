@@ -22,7 +22,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <?php echo ($_SERVER['REQUEST_URI'] == '/people.php') ? 'active' : ''; ?> p-2" href="./dashboard.php">
+                <a class="nav-link <?php echo ($_SERVER['REQUEST_URI'] == '/company.php') ? 'active' : ''; ?> p-2" href="./company.php">
                     <img src="http://127.0.0.1:5500/assets/images/handshake.svg" style="width: 40px; height: 40px;" alt="">
                 </a>
             </li>

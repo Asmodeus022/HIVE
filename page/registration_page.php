@@ -1,6 +1,6 @@
 <?php
 function checkIfExist($email, $conn){
-    $sqls =  "SELECT email FROM managers WHERE email='$email' LIMIT 1";
+    $sqls =  "SELECT Email FROM owners WHERE Email='$email' LIMIT 1";
     $results = $conn->query($sqls);
     if($results){
         $rowss = $results->fetch_assoc();
@@ -12,7 +12,7 @@ function checkIfExist($email, $conn){
     }
 }
 
-function register($companyname, $location, $businesscategory, $businesssize, $email, $pword, $conn){
+function register($username, $companyname, $location, $businesscategory, $businesssize, $email, $pword, $conn){
     $exist = checkIfExist($email, $conn);
     if($exist){
         echo "<div class='alert alert-warning alert-dismissible fade show' role='alert'>
@@ -22,7 +22,7 @@ function register($companyname, $location, $businesscategory, $businesssize, $em
     }else{
         $otp='0';
         $hashpass=md5($pword);
-        $sql = ("INSERT INTO managers(`company_name`, `location`,`category`, `business_size`,email, `password` , otp) VALUES('$companyname','$location','$businesscategory','$businesssize','$email','$hashpass','$otp')");
+        $sql = ("INSERT INTO owners(Username,`company_name`, `location`,`category`, `business_size`,email, `password` , otp) VALUES('$username','$companyname','$location','$businesscategory','$businesssize','$email','$hashpass','$otp')");
         $result = $conn->query($sql);
         if($result === TRUE){
             echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
@@ -45,7 +45,7 @@ ob_start();
 require_once('../includes/database.php');
 
 if(isset($_POST['btnenter'])){
-    register($_POST['company_name'], $_POST['location'], $_POST['business_category'], $_POST['business_size'],$_POST['email'],$_POST['pword'], $conn);
+    register($_POST['username'], $_POST['company_name'], $_POST['location'], $_POST['business_category'], $_POST['business_size'],$_POST['email'],$_POST['pword'], $conn);
 }
 ?>
 
@@ -92,6 +92,10 @@ if(isset($_POST['btnenter'])){
                             <div class="mb-2 mt-3">
                                 <label for="company_name" class="form-label">Company Name</label>
                                 <input type="text" class="form-control" name="company_name" id="company_name" aria-describedby="profileNameHelp">
+                            </div>
+                            <div class="mb-2">
+                                <label for="username" class="form-label">Username</label>
+                                <input type="text" class="form-control" name="username" id="username">
                             </div>
                             <div class="mb-2">
                                 <label for="email" class="form-label">Email Address</label>
