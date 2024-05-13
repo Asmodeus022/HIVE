@@ -50,26 +50,26 @@
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Send To</h1>
-                    <button type="button" class="btn-close me-2" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <select class="form-select share-user" aria-label="Share To">
-                        <option selected disabled>Select User to Share</option>
-                        <?php
-                            $userQuery = "SELECT * FROM owners WHERE Id != " . $_SESSION['ownerId'];
-                            $userResult = mysqli_query($conn, $userQuery);
-                            while ($userRow = mysqli_fetch_assoc($userResult)) {
-                                echo "<option value='" . $userRow['Id'] . "'>" . $userRow['Username'] . "</option>";
-                            }
-                        ?>
-                    </select>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary sendTo">Send</button>
-                </div>
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Send To</h1>
+                        <button type="button" class="btn-close me-2" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <select class="form-select share-user" aria-label="Share To">
+                            <option selected disabled>Select User to Share</option>
+                            <?php
+                                $userQuery = "SELECT * FROM owners WHERE Id != " . $_SESSION['ownerId'];
+                                $userResult = mysqli_query($conn, $userQuery);
+                                while ($userRow = mysqli_fetch_assoc($userResult)) {
+                                    echo "<option value='" . $userRow['Id'] . "'>" . $userRow['Username'] . "</option>";
+                                }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary sendTo">Send</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -249,7 +249,6 @@
             }
 
             console.log(totalAmount);
-            var sessionRole = "<?php echo $_SESSION['role']; ?>";
             $.ajax({
                 type: "POST",
                 url: "../components/forms/addTransaction.php",
@@ -257,7 +256,6 @@
                     selectedItems: selectedItems,
                     paymentMethod: paymentMethod,
                     totalAmount: totalAmount,
-                    sessionRole: sessionRole 
                 },
                 success: function(response) {
                     console.log(response);

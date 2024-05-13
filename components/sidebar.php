@@ -27,7 +27,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <?php echo ($_SERVER['REQUEST_URI'] == '/transaction.php') ? 'active' : ''; ?> p-2" href="./dashboard.php">
+                <a class="nav-link <?php echo ($_SERVER['REQUEST_URI'] == '/transaction.php') ? 'active' : ''; ?> p-2" href="./transact.php">
                     <img src="http://127.0.0.1:5500/assets/images/transact.svg" style="width: 40px; height: 40px;" alt="">
                 </a>
             </li>
@@ -43,7 +43,7 @@
                 <img src="http://127.0.0.1:5500/assets/images/account.svg" style="width: 40px; height: 40px;" alt="">
             </button>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li><a class="dropdown-item" href="./profile.php">Profile</a></li>
                 <li><a class="dropdown-item" href="#">Settings</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="../includes/logout.php">Logout</a></li>

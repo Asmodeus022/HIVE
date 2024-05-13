@@ -6,12 +6,12 @@
         $selectedItems = $_POST["selectedItems"];
         $paymentMethod = $_POST["paymentMethod"];
         $totalAmount = $_POST["totalAmount"];
-        $sessionRole = $_POST["sessionRole"];
+        $cashier = $_SESSION["username"];
         
         mysqli_begin_transaction($conn);
 
         try {
-            $insertTransactionQuery = "INSERT INTO transactions (payment_method, total_amount, cashier) VALUES ('$paymentMethod', '$totalAmount', '$sessionRole')";
+            $insertTransactionQuery = "INSERT INTO transactions (payment_method, total_amount, cashier) VALUES ('$paymentMethod', '$totalAmount', '$cashier')";
             mysqli_query($conn, $insertTransactionQuery);
             $transactionId = mysqli_insert_id($conn);
             
