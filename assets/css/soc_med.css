@@ -1,0 +1,18 @@
+.profile-pic {
+    width: 100px; /* Adjust width and height as needed */
+    height: 100px;
+    border-radius: 50%; /* Create a circular shape */
+    overflow: hidden; /* Hide overflowing content */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #fff; /* Optional: Add border */
+}
+.profile-pic img {
+    max-width: 100%; /* Ensure the image fits within the circle */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.custom-text-box {
+    width: 80vh; /* Adjust the width value as needed */
+}
