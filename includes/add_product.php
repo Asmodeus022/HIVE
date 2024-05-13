@@ -31,5 +31,5 @@ if(isset($_POST['add_product'])){
     // else {
         
     // }
-}
+    }
 ?>
