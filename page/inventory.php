@@ -54,17 +54,92 @@
                             <table id="myTable" class="hover table table-striped text-center" style="width: 100%">
                                 <thead>
                                     <tr>
-                                        <th></th>
                                         <th>Image</th>
                                         <th>Product Id</th>
                                         <th>Product Name</th>
                                         <th>Brand</th>
                                         <th>Price</th>
                                         <th>Stocks</th>
+                                        <th>Owner</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
-                                <tbody id="productTableBody"></tbody>
+                                <tbody>
+                                    <?php
+                                        $ownerId = $_SESSION['ownerId'];
+
+                                        $sql_owner_username = "SELECT Username FROM owners";
+                                        $result_owner_username = mysqli_query($conn, $sql_owner_username);
+                                        if ($result_owner_username && mysqli_num_rows($result_owner_username) > 0) {
+                                            $owner_username_row = mysqli_fetch_assoc($result_owner_username);
+                                            $owner_username = $owner_username_row['Username'];
+                                        } else {
+                                            $owner_username = "Unknown";
+                                        }
+
+                                        $sql_owned_products = "SELECT * FROM products WHERE Owner_Id = $ownerId";
+
+                                        $sql_shared_products = "SELECT p.*
+                                                                FROM products p
+                                                                INNER JOIN sharedproducts sp ON p.Id = sp.Product_Id
+                                                                WHERE sp.Shared_With_Owner_Id = $ownerId";
+
+                                        $products = [];
+
+                                        $result_owned = mysqli_query($conn, $sql_owned_products);
+                                        if ($result_owned) {
+                                            while ($row = mysqli_fetch_assoc($result_owned)) {
+                                                $row['Owner'] = ($row['Owner_Id'] == $ownerId) ? "ME" : $owner_username;
+                                                $products[] = $row;
+                                            }
+                                        } else {
+                                            echo "Error: " . mysqli_error($conn);
+                                        }
+
+                                        $result_shared = mysqli_query($conn, $sql_shared_products);
+                                        if ($result_shared) {
+                                            while ($row = mysqli_fetch_assoc($result_shared)) {
+                                                $row['Owner'] = ($row['Owner_Id'] == $ownerId) ? "ME" : $owner_username;
+                                                $products[] = $row;
+                                            }
+                                        } else {
+                                            echo "Error: " . mysqli_error($conn);
+                                        }
+
+                                        if (count($products) > 0) {
+                                            foreach ($products as $row) {
+                                                echo "<tr>";
+                                                echo "<td><img src='../includes/phpupload/uploads/{$row['file_path']}' style='width: 100px; height: 100px;' alt='Image'></td>";
+                                                echo "<td>{$row['Id']}</td>";
+                                                echo "<td>{$row['Name']}</td>";
+                                                echo "<td>{$row['Brand']}</td>";
+                                                echo "<td>{$row['Price']}</td>";
+                                                echo "<td>{$row['Stocks']}</td>";
+                                                echo "<td>{$row['Owner']}</td>"; // Display Owner
+                                                echo "<td>
+                                                        <button type=\"button\"
+                                                        class=\"btn btn-hive update-btn\" 
+                                                        data-bs-toggle=\"modal\"
+                                                        data-bs-target=\"#staticBackdrop_update\"
+                                                        data-product-id=\"{$row['Id']}\"
+                                                        data-product-name=\"{$row['Name']}\"
+                                                        data-category=\"{$row['Category']}\"
+                                                        data-brand=\"{$row['Brand']}\"
+                                                        data-price=\"{$row['Price']}\"
+                                                        data-quantity=\"{$row['Stocks']}\"
+                                                        data-daily-ave=\"{$row['Daily_Ave']}\"
+                                                        data-render-point=\"{$row['Render_Point']}\">Update</button>
+                                                    </td>";
+                                                echo "</tr>";
+                                            }
+                                        } else {
+                                            echo "<tr><td colspan='8'>No data found</td></tr>";
+                                        }
+
+                                        mysqli_close($conn);
+                                    ?>
+
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -81,7 +156,6 @@
     <script>
         $(document).ready(function() {
             $(document).on('click', '.update-btn', function() {
-                // Extract product information from data attributes
                 var productId = $(this).data('product-id');
                 var productName = $(this).data('product-name');
                 var category = $(this).data('category');
@@ -92,7 +166,6 @@
                 var renderPoint = $(this).data('render-point');
                 console.log(productName)
 
-                // Set values of input fields in the update modal
                 $('#productName_update').val(productName);
                 $('#category_update').val(category);
                 $('#product_id_update').val(productId);
@@ -102,7 +175,6 @@
                 $('#daily_ave_update').val(dailyAve);
                 $('#render_point_update').val(renderPoint);
 
-                // Show the update modal
                 $('#staticBackdrop_update').modal('show');
             });
         });

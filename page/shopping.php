@@ -132,7 +132,6 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="../assets/js/shopping.js"></script>
     <script>
         var selectedItems = [];
         var totalAmount = 0;
@@ -244,7 +243,11 @@
 
         $('.addTransact').click(function() {
             var paymentMethod = $('input[name="payment"]:checked').val();
-            // Get the total amount displayed on the page
+            if (!paymentMethod) {
+                alert('Please select a payment method.');
+                return;
+            }
+
             console.log(totalAmount);
             var sessionRole = "<?php echo $_SESSION['role']; ?>";
             $.ajax({
@@ -258,14 +261,14 @@
                 },
                 success: function(response) {
                     console.log(response);
-                    // Handle successful checkout (e.g., show success message, redirect to thank you page)
+                    alert('Checkout successful!');
                 },
                 error: function(xhr, status, error) {
                     console.error(xhr.responseText);
-                    // Handle error (e.g., show error message)
                 }
             });
         });
+
 
         $(document).ready(function(){
             $('.sendTo').click(function() {
@@ -296,5 +299,6 @@
         });
 
     </script>
+    <script src="../assets/js/shopping.js"></script>
 </body>
 </html>

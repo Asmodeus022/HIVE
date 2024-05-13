@@ -10,7 +10,7 @@ $(document).ready(function() {
                 response.forEach(function(product) {
                     var cardHtml = `
                         <div class='col-4 mb-4'>
-                            <div class='card product-card' onclick='addToCheckout(${product.Id})' data-product-id='${product.Id}'>
+                            <div class='card product-card' data-product-id='${product.Id}'>
                                 <img src='../includes/phpupload/uploads/${product.file_path}' class='card-img-top' alt='...'>
                                 <div class='card-body'>
                                     <h5 class='card-title'>${product.Name}</h5>
@@ -19,6 +19,7 @@ $(document).ready(function() {
                                         <p class='card-text card-price'>₱ ${parseFloat(product.Price).toFixed(2)}</p>
                                         <p>(${product.Stocks} left)</p>
                                     </div>
+                                    <button class='btn btn-primary btn-sm addToCheckout'>Add to Checkout</button>
                                 </div>
                             </div>
                         </div>`;
@@ -32,4 +33,14 @@ $(document).ready(function() {
     }
 
     loadProducts();
+
+    $(document).on('click', '.addToCheckout', function() {
+        var card = $(this).closest('.card');
+        var productId = card.data('product-id');
+        var productName = card.find('.card-title').text();
+        var productCategory = card.find('.card-category').text();
+        var productPrice = card.find('.card-price').text();
+        var productImage = card.find('.card-img-top').attr('src');
+        addToSelectedItems(productId, productName, productCategory, productPrice, productImage);
+    });
 });
