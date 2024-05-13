@@ -1,6 +1,6 @@
 <?php
 function checkIfExist($email, $conn){
-    $sqls =  "SELECT email FROM managers WHERE email='$email' LIMIT 1";
+    $sqls =  "SELECT email FROM owners WHERE email='$email' LIMIT 1";
     $results = $conn->query($sqls);
     if($results){
         $rowss = $results->fetch_assoc();
@@ -22,7 +22,7 @@ function register($companyname, $location, $businesscategory, $businesssize, $em
     }else{
         $otp='0';
         $hashpass=md5($pword);
-        $sql = ("INSERT INTO managers(`company_name`, `location`,`category`, `business_size`,email, `password` , otp) VALUES('$companyname','$location','$businesscategory','$businesssize','$email','$hashpass','$otp')");
+        $sql = ("INSERT INTO owners(`company_name`, `location`,`category`, `business_size`,email, `password` , otp) VALUES('$companyname','$location','$businesscategory','$businesssize','$email','$hashpass','$otp')");
         $result = $conn->query($sql);
         if($result === TRUE){
             echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
