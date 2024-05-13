@@ -4,7 +4,7 @@
   function changePass($email, $newPass){
     require_once("../includes/database.php");
       //prepare and execute the sql statement to update the password
-      $stmt = $conn->prepare("UPDATE managers SET pword= ? WHERE email= ?");
+      $stmt = $conn->prepare("UPDATE owners SET `Password`= ? WHERE Email= ?");
       $stmt->bind_param("ss", $newPass, $email);
       if($stmt->execute()){
           //IF there is affected row means the update is successful
