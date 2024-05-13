@@ -260,9 +260,11 @@
                 success: function(response) {
                     console.log(response);
                     alert('Checkout successful!');
+                    location.reload();
                 },
                 error: function(xhr, status, error) {
                     console.error(xhr.responseText);
+                    alert('Error occurred. Please try again.');
                 }
             });
         });
@@ -287,10 +289,12 @@
                         productIds: productIds
                     },
                     success: function(response) {
-                        console.log(response);
+                        alert('Send successful!');
+                        location.reload();
                     },
                     error: function(xhr, status, error) {
                         console.error(xhr.responseText);
+                        alert('Error occurred. Please try again.');
                     }
                 });
             });
