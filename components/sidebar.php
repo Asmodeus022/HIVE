@@ -1,5 +1,5 @@
 <div class="container-fluid p-0 m-0 bg-light sidebar h-100">
-    <div class="sidebar-sticky">
+    <div class="sidebar-sticky position-relative h-100">
         <div class="container-fluid">
             <a class="navbar-brand d-flex justify-content-center" href="#">                        
                 <img src="http://127.0.0.1:5500/assets/images/HIVE SVG BRAND.svg" style="width: 85px; height: 85px;" alt="">
@@ -37,5 +37,17 @@
                 </a>
             </li>
         </ul>
+
+        <div class="btn-group dropup position-absolute bottom-0 start-50 translate-middle-x mb-3 z-3">
+            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="http://127.0.0.1:5500/assets/images/account.svg" style="width: 40px; height: 40px;" alt="">
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li><a class="dropdown-item" href="#">Settings</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="../includes/logout.php">Logout</a></li>
+            </ul>
+        </div>
     </div>
 </div>

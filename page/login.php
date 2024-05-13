@@ -38,7 +38,8 @@
                                 <label for="pword" class="form-label">Password</label>
                                 <input type="password" class="form-control" name="pword" id="pword">
                             </div>
-                            <div class="mb-3 d-flex justify-content-end">
+                            <div class="mb-3 d-flex justify-content-between">
+                                <a href="registration_page.php">Ceate Account</a>
                                 <a href="password_recovery.php">Forgot Password</a>
                             </div>
 

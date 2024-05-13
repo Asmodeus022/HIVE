@@ -14,48 +14,48 @@
     </style>
 </head>
 <body>
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal update_modal fade" id="staticBackdrop_update" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Update Product</h1>
                 <button type="button" class="btn-close me-1" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="../components/forms/prodAddForm.php" method="POST" enctype="multipart/form-data">
+                <form action="../components/forms/prodUpdateForm.php" method="POST" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-5">
-                            <input type="file" class="form-control file-upload" name="product_image" id="product_image" accept="image/*">
+                            <input type="file" class="form-control file-upload" name="product_image" id="product_image_update" accept="image/*">
                         </div>
                         <div class="col-6">
                             <div class="mb-3">
                                 <label for="productName" class="form-label">Product Name</label>
-                                <input type="text" class="form-control" name="productName" id="productName" placeholder="" required>
+                                <input type="text" class="form-control" name="productName" id="productName_update" placeholder="" required>
                             </div>
                             <div id="error-pName-message" style="color: red;"></div>
 
                             <div class="mb-3">
                                 <label for="category" class="form-label">Category</label>
-                                <input type="text" class="form-control" name="category" id="category" placeholder="">
+                                <input type="text" class="form-control" name="category" id="category_update" placeholder="">
                             </div>
                             <div class="row">
                                 <div class="col-4">
                                     <div class="mb-3">
                                         <label for="product_id" class="form-label">Product ID</label>
-                                        <input type="text" class="form-control" name="product_id" id="product_id" placeholder="" required>
+                                        <input type="text" class="form-control" name="product_id" id="product_id_update" placeholder="" required>
                                     </div>
                                     <div id="error-pId-message" style="color: red;"></div>
                                 </div>
                                 <div class="col-4">
                                     <div class="mb-3">
                                         <label for="brand" class="form-label">Brand</label>
-                                        <input type="text" class="form-control" name="brand" id="brand" placeholder="">
+                                        <input type="text" class="form-control" name="brand" id="brand_update" placeholder="">
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="mb-3">
                                         <label for="price" class="form-label">Price</label>
-                                        <input type="number" class="form-control" name="price" id="price" placeholder="" required>
+                                        <input type="number" class="form-control" name="price" id="price_update" placeholder="" required>
                                     </div>
                                     <div id="error-price-message" style="color: red;"></div>
                                 </div>
@@ -64,19 +64,19 @@
                                 <div class="col-4">
                                     <div class="mb-3">
                                         <label for="quantity" class="form-label">Quantity</label>
-                                        <input type="number" class="form-control" name="quantity" id="quantity" placeholder="">
+                                        <input type="number" class="form-control" name="quantity" id="quantity_update" placeholder="">
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="mb-3">
                                         <label for="daily_ave" class="form-label">Daily Average Sale</label>
-                                        <input type="number" class="form-control" name="daily_ave" id="daily_ave" placeholder="">
+                                        <input type="number" class="form-control" name="daily_ave" id="daily_ave_update" placeholder="">
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="mb-3">
                                         <label for="render_point" class="form-label">Render Point</label>
-                                        <input type="number" class="form-control" name="render_point" id="render_point" placeholder="">
+                                        <input type="number" class="form-control" name="render_point" id="render_point_update" placeholder="">
                                     </div>
                                 </div>
                             </div>
@@ -84,7 +84,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary" name="add_product">Add</button>
+                        <button type="submit" class="btn btn-primary" name="update_product">Update</button>
                     </div>
                 </form>
             </div>
@@ -93,6 +93,7 @@
 </div>
 
 <script>
+    
     // function validateForm() {
     //     var productName = document.getElementById("productName").value;
     //     var productId = document.getElementById("product_id").value;

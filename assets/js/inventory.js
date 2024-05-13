@@ -34,4 +34,43 @@ $(document).ready(function () {
             });
         }
     });
+
+    $(document).ready(function() {
+        function loadProducts() {
+            $.ajax({
+                url: '../API/getAllProducts.php',
+                method: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    console.log(data);
+                    $('#productTableBody').empty();
+    
+                    data.forEach(function(product) {
+                        var row = '<tr>' +
+                            '<td></td>' +
+                            '<td><img src="../includes/phpupload/uploads/' + product['file_path'] + '" style="width: 100px; height: 100px;" alt="Image"></td>' +
+                            '<td>' + product['Id'] + '</td>' +
+                            '<td>' + product['Name'] + '</td>' +
+                            '<td>' + product['Brand'] + '</td>' +
+                            '<td>' + product['Price'] + '</td>' +
+                            '<td>' + product['Stocks'] + '</td>' +
+                            '<td>' +
+                            '<button type="button" class="btn btn-hive update-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop_update" data-product-id="' + product['Id'] + '" data-product-name="' + product['Name'] + '" data-category="' + product['Category'] + '" data-brand="' + product['Brand'] + '" data-price="' + product['Price'] + '" data-quantity="' + product['Stocks'] + '" data-daily-ave="' + product['Daily_Ave'] + '" data-render-point="' + product['Render_Point'] + '">Update</button>' +
+                            '</td>' +
+                            '</tr>';
+                        $('#productTableBody').append(row);
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error loading products:', error);
+                }
+            });
+        }
+    
+        loadProducts();
+    });
+    
+
 });
+
+

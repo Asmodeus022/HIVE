@@ -47,6 +47,33 @@
     </head>
 <body>
     <div class="row p-0 m-0" style="height: 100vh; overflow: hidden">
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Send To</h1>
+                    <button type="button" class="btn-close me-2" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <select class="form-select share-user" aria-label="Share To">
+                        <option selected disabled>Select User to Share</option>
+                        <?php
+                            $userQuery = "SELECT * FROM owners WHERE Id != " . $_SESSION['ownerId'];
+                            $userResult = mysqli_query($conn, $userQuery);
+                            while ($userRow = mysqli_fetch_assoc($userResult)) {
+                                echo "<option value='" . $userRow['Id'] . "'>" . $userRow['Username'] . "</option>";
+                            }
+                        ?>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary sendTo">Send</button>
+                </div>
+                </div>
+            </div>
+        </div>
+
         <div class="col-1 h-100" style="min-width: 100px">
             <?php include '../components/sidebar.php'; ?>
         </div>
@@ -58,33 +85,7 @@
                             <input type="email" class="form-control" id="searchItem" placeholder="Search Item">
                         </div>
                     </div>
-                    <div id="productContainer" class="row" style="overflow: auto; max-height: 80vh">
-                        <?php
-                            $sql = "SELECT * FROM products";
-                            $resultSql = mysqli_query($conn, $sql);
-
-                            if (mysqli_num_rows($resultSql) > 0) {
-                                while($row = mysqli_fetch_assoc($resultSql)) {
-                                    echo "<div class='col-4 mb-4'>
-                                            <div class='card product-card' onclick='addToCheckout(" . $row['Id'] . ")' data-product-id='" . $row['Id'] . "'>
-                                                <img src='../includes/phpupload/uploads/{$row['file_path']}' class='card-img-top' alt='...'>
-                                                <div class='card-body'>
-                                                    <h5 class='card-title'>" . $row['Name'] . "</h5>
-                                                    <p class='card-text card-category'>" . $row['Category'] . "</p>
-                                                    <div class='d-flex justify-content-between'>
-                                                        <p class='card-text card-price'>₱ " . number_format($row['Price'], 2) . "</p>
-                                                        <p>(" . $row['Stocks'] . " left)</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>";
-                                }
-                            } else {
-                                echo "<div class='col-12'>No products found</div>";
-                            }
-                            mysqli_close($conn);
-                        ?>
-                    </div>
+                    <div id="productContainer" class="row" style="overflow: auto; max-height: 80vh"></div>
                 </div>
                 <div class="col-3">
                     <div class="h-100 border rounded-3 position-relative" style="background-color: white">
@@ -120,6 +121,7 @@
                             </div>
                             <div class="d-flex justify-content-end mb-3">
                                 <div class="btn btn-hive addTransact">Checkout</div>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Send To</button>
                             </div>
                         </div>
                     </div>
@@ -130,6 +132,7 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="../assets/js/shopping.js"></script>
     <script>
         var selectedItems = [];
         var totalAmount = 0;
@@ -261,6 +264,34 @@
                     console.error(xhr.responseText);
                     // Handle error (e.g., show error message)
                 }
+            });
+        });
+
+        $(document).ready(function(){
+            $('.sendTo').click(function() {
+                var sharedWithId = $('.share-user').val();
+                
+                if (!sharedWithId) {
+                    alert('Please select a user to share the product with.');
+                    return;
+                }
+
+                var productIds = selectedItems.map(item => item.id);
+
+                $.ajax({
+                    type: "POST",
+                    url: "../includes/share_product.php",
+                    data: {
+                        sharedWithId: sharedWithId,
+                        productIds: productIds
+                    },
+                    success: function(response) {
+                        console.log(response);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
             });
         });
 

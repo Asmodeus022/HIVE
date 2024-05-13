@@ -40,7 +40,7 @@ if ( isset($_POST['add_product'])) {
     // Check if a file is uploaded
     if(isset($_FILES['product_image']) && $_FILES['product_image']['error'] === UPLOAD_ERR_OK) {
         // File upload directory
-        $targetDirectory = "../../includes/phpupload/uploads/";
+        $targetDirectory = "./../../includes/phpupload/uploads/";
         // File name
         $targetFile = basename($_FILES["product_image"]["name"]);
 

@@ -1,7 +1,9 @@
 <?php 
+    session_start();
     @include "../includes/database.php";
     @include "../includes/header.php";
-    @include "../components/modal.php";
+    @include "../components/add_modal.php";
+    @include "../components/update_modal.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,7 +51,7 @@
                             <button type="button" class="btn btn-hive" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Add Item</button>
                         </div>
                         <div class="p-2">
-                            <table id="myTable" class="hover table table-striped" style="width: 100%">
+                            <table id="myTable" class="hover table table-striped text-center" style="width: 100%">
                                 <thead>
                                     <tr>
                                         <th></th>
@@ -59,34 +61,10 @@
                                         <th>Brand</th>
                                         <th>Price</th>
                                         <th>Stocks</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <?php
-                                        $sql = "SELECT * FROM products";
-
-                                        $result = mysqli_query($conn, $sql);
-                                    
-                                        if (mysqli_num_rows($result) > 0) {
-                                            while($row = mysqli_fetch_assoc($result)) {
-                                                echo "<tr>";
-                                                echo "<td></td>";
-                                                echo "<td><img src='../includes/phpupload/uploads/{$row['file_path']}' style='width: 100px; height: 100px;' alt='Image'></td>";
-                                                echo "<td>{$row['Id']}</td>";
-                                                echo "<td>{$row['Name']}</td>";
-                                                echo "<td>{$row['Brand']}</td>";
-                                                echo "<td>{$row['Price']}</td>";
-                                                echo "<td>{$row['Stocks']}</td>";
-                                                echo "</tr>";
-                                            }
-                                        }                                        
-                                         else {
-                                            echo "<tr><td colspan='5'>No data found</td></tr>";
-                                        }
-                                    
-                                        mysqli_close($conn);
-                                    ?>
-                                </tbody>
+                                <tbody id="productTableBody"></tbody>
                             </table>
                         </div>
                     </div>
@@ -100,5 +78,35 @@
     <script src="https://cdn.datatables.net/select/2.0.2/js/select.dataTables.js"></script>
     <script src="https://cdn.datatables.net/select/2.0.2/js/dataTables.select.js"></script>
     <script src="../assets/js/inventory.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(document).on('click', '.update-btn', function() {
+                // Extract product information from data attributes
+                var productId = $(this).data('product-id');
+                var productName = $(this).data('product-name');
+                var category = $(this).data('category');
+                var brand = $(this).data('brand');
+                var price = $(this).data('price');
+                var quantity = $(this).data('quantity');
+                var dailyAve = $(this).data('daily-ave');
+                var renderPoint = $(this).data('render-point');
+                console.log(productName)
+
+                // Set values of input fields in the update modal
+                $('#productName_update').val(productName);
+                $('#category_update').val(category);
+                $('#product_id_update').val(productId);
+                $('#brand_update').val(brand);
+                $('#price_update').val(price);
+                $('#quantity_update').val(quantity);
+                $('#daily_ave_update').val(dailyAve);
+                $('#render_point_update').val(renderPoint);
+
+                // Show the update modal
+                $('#staticBackdrop_update').modal('show');
+            });
+        });
+        </script>
+
 </body>
 </html>
