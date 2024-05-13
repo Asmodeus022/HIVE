@@ -19,6 +19,7 @@
             $role = $row['Role'];
 
             if (md5($pword) == $password) {
+                $_SESSION['username'] = $username;
                 $_SESSION['email'] = $email;
                 $_SESSION['password'] = $password;
                 $_SESSION['ownerId'] = $ownerId;
