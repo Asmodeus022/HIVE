@@ -76,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $otp = generateOTP();
 
     // Save OTP in the database
-    $sql = "UPDATE managers SET OTP = $otp WHERE email = '$email'";
+    $sql = "UPDATE owners SET OTP = $otp WHERE email = '$email'";
     mysqli_query($conn, $sql);
 
     // Send OTP via email using PHPMailer

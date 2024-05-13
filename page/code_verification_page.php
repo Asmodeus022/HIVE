@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $otp = $_POST["code"];
 
     // Retrieve the stored OTP from the database
-    $sql = "SELECT OTP FROM managers WHERE email = '$email'";
+    $sql = "SELECT OTP FROM owners WHERE Email = '$email'";
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);
     $storedOTP = $row["OTP"];
@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($otp == $storedOTP) {
         // OTP verification successful
         // Proceed with password change
-        $sql = "UPDATE managers SET OTP = '0' WHERE email = '$email'";
+        $sql = "UPDATE owners SET OTP = '0' WHERE Email = '$email'";
         mysqli_query($conn, $sql);
         echo"<script>alert('The OTP verification is successfully')</script>";
         header("Location: change_pass.php");
