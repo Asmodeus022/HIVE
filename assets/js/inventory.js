@@ -34,10 +34,25 @@ $(document).ready(function () {
                         
                         $('#dailyAverageSale').text(response.Daily_Ave);
                         $('#renderPoint').text(response.Daily_Ave * response.Render_Point);
+                        $('#available').text(response.Stocks);
                     }
                 },
                 error: function (xhr, status, error) {
                     console.error('Error fetching daily average sales data:', error);
+                }
+            });
+
+            $.ajax({
+                url: '../API/fetchTotalSold.php',
+                method: 'POST',
+                data: { productId: productId },
+                dataType: 'json', 
+                success: function (response) {
+                    console.log(response);
+                    $('#sold').text(response.TotalSold);
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error fetching sold data:', error);
                 }
             });
             

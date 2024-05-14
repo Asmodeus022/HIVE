@@ -27,11 +27,11 @@
                         <div class="d-flex">
                             <div class="col-6 mb-4">
                                 <p class="">Sold</p>
-                                <p class="">0 pcs</p>
+                                <p class=""><span id='sold'>0</span> pcs</p>
                             </div>
                             <div class="col-6">
                                 <p class="">Available</p>
-                                <p class="">0 pcs</p>
+                                <p class=""><span id='available'>0</span> pcs</p>
                             </div>
                         </div>
                         <div class="d-flex flex-column h-75">
