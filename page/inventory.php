@@ -5,16 +5,16 @@
     @include "../components/add_modal.php";
     @include "../components/update_modal.php";
 
-// Check the user's role
-$user_role = $_SESSION['role'];
+    // Check the user's role
+    $user_role = $_SESSION['role'];
 
-// Define admin role
-define("ROLE_ADMIN", "OWNER");
+    // Define admin role
+    define("ROLE_ADMIN", "OWNER");
 
-// Function to determine if the user is an admin
-function is_admin() {
-    return $_SESSION['role'] === ROLE_ADMIN;
-}
+    // Function to determine if the user is an admin
+    function is_admin() {
+        return $_SESSION['role'] === ROLE_ADMIN;
+    }
 ?>
 
 <!DOCTYPE html>
