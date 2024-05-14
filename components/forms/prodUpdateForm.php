@@ -2,28 +2,31 @@
 session_start();
 require_once("../../includes/database.php");
 
-if (isset($_POST['productId'])) {
-    $productId = $_POST['productId'];
+if (isset($_POST['update_product'])) {
+    $productId = $_POST['product_id'];
 
-    // Retrieve product information from the database
-    $stmt = $conn->prepare("SELECT * FROM products WHERE Id = ?");
-    $stmt->bind_param("i", $productId);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    // Retrieve the updated data from the form
+    $productName = $_POST['productName'];
+    $category = $_POST['category'];
+    $brand = $_POST['brand'];
+    $price = $_POST['price'];
+    $quantity = $_POST['quantity'];
+    $dailyAve = $_POST['daily_ave'];
+    $renderPoint = $_POST['render_point'];
 
-    if ($result->num_rows > 0) {
-        // Fetch the product data
-        $productData = $result->fetch_assoc();
+    // Update the product information in the database
+    $stmt = $conn->prepare("UPDATE products SET `Name`=?, Category=?, Brand=?, Price=?, Stocks=?, Daily_Ave=?, Render_Point=? WHERE Id=?");
+    $stmt->bind_param("sssssssi", $productName, $category, $brand, $price, $quantity, $dailyAve, $renderPoint, $productId);
 
-        // Encode the product data as JSON and return it
-        header('Content-Type: application/json');
-        echo json_encode($productData);
+    if ($stmt->execute()) {
+        // If the update was successful, return a success message
+        echo json_encode(array('success' => 'Product updated successfully'));
     } else {
-        // If no product found with the given ID
-        echo json_encode(array('error' => 'Product not found'));
+        // If the update failed, return an error message
+        echo json_encode(array('error' => 'Failed to update product'));
     }
 } else {
-    // If product ID is not provided
-    echo json_encode(array('error' => 'Product ID not provided'));
+    // If the form submission is not valid, return an error message
+    echo json_encode(array('error' => 'Invalid form submission'));
 }
 ?>

@@ -70,7 +70,7 @@ mysqli_close($conn);
                         <form action="" method="POST">
                             <div class="mb-3">
                                 <label for="code" class="form-label fw-bold">Verification code</label>
-                                <input type="password" class="form-control" name="code" id="code">
+                                <input type="password" class="form-control" name="code" id="code" required>
                             </div>
 
                             <div class="d-flex justify-content-end my-5">

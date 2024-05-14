@@ -125,6 +125,54 @@
 
     //     return isValid;
     // }
+    <script>
+    // Define a function to fetch product data and populate the form fields
+    function populateForm(productId) {
+        // Make an AJAX request to prodUpdateForm.php
+        $.ajax({
+            url: '../components/forms/prodUpdateForm.php',
+            method: 'POST',
+            data: { productId: productId },
+            dataType: 'json',
+            success: function(response) {
+                // Check if the response contains any errors
+                if (response.error) {
+                    // Handle the error (e.g., display an error message)
+                    console.error(response.error);
+                    return;
+                }
+
+                // Populate the form fields with the retrieved data
+                $('#productName_update').val(response.Name);
+                $('#category_update').val(response.Category);
+                $('#product_id_update').val(response.Id);
+                $('#brand_update').val(response.Brand);
+                $('#price_update').val(response.Price);
+                $('#quantity_update').val(response.Quantity);
+                $('#daily_ave_update').val(response.Daily_Ave);
+                $('#render_point_update').val(response.Render_Point);
+
+                // Show the modal
+                $('#staticBackdrop_update').modal('show');
+            },
+            error: function(xhr, status, error) {
+                // Handle the AJAX error (e.g., display an error message)
+                console.error(error);
+            }
+        });
+    }
+
+    $(document).ready(function() {
+        // Add an event listener to the update button
+        $(document).on('click', '.update-btn', function() {
+            // Get the product ID from the data attribute
+            var productId = $(this).data('product-id');
+            
+            // Call the populateForm function with the product ID
+            populateForm(productId);
+        });
+    });
+</script>
 </script>
 </body>
 </html>
