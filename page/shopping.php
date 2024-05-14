@@ -43,6 +43,11 @@
                 border-color: #007bff;
             }
 
+            #selectedItemsList {
+                height: calc(100vh - 350px);
+                overflow-y: auto;
+            }
+
         </style>
     </head>
 <body>

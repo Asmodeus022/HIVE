@@ -11,7 +11,7 @@
             <?php include '../components/sidebar.php'; ?>
         </div>
         <div class="col">
-            <div class="row p-3 c">
+            <div class="row p-3 h-100">
                 <h3 class=" mb-4">Analytics</h3>
                 <div class='col-8 h-75'>
                     <h3>Daily Sold Amount</h3>
