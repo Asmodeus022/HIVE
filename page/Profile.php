@@ -185,7 +185,6 @@ function is_admin() {
                                 echo "<tr><td colspan='12' class='text-center'>No employees found</td></tr>";
                             }
                         ?>
-?>
                     </tbody>
                 </Table>
             </div>
