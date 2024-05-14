@@ -13,7 +13,14 @@
         <div class="col">
             <div class="row p-3 h-100">
                 <h3 class=" mb-4">Analytics</h3>
-                <canvas id="myChart"></canvas>
+                <div class='h-75'>
+                    <div class='col-8'>
+                        <canvas id="myChart"></canvas>
+                    </div>
+                    <div class='col-4'>
+                        <canvas id="myPieChart"></canvas>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

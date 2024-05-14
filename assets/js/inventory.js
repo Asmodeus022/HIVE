@@ -5,7 +5,8 @@ $(document).ready(function () {
         scrollY: 'calc(100vh - 300px)',
         select: {
             style: 'single'
-        }
+        },
+        order: [[1, 'asc']]
     });
 
     var table = $('#shared-table').DataTable({
@@ -14,13 +15,15 @@ $(document).ready(function () {
         scrollY: 'calc(100vh - 300px)',
         select: {
             style: 'single'
-        }
+        },
+        order: [[1, 'asc']]
     });
 
     table1.on('select', function (e, dt, type, indexes) {
-        var selectedRowData = table.rows(indexes).data().toArray();
+        var selectedRowData = table1.rows(indexes).data().toArray(); // Change 'table' to 'table1'
         if (selectedRowData.length > 0) {
             var productId = selectedRowData[0][1];
+            console.log(productId);
             
             $.ajax({
                 url: 'http://localhost/hive/includes/fetch_daily_average_sales.php',
