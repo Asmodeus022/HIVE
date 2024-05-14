@@ -20,6 +20,11 @@ $(document).ready(function () {
     });
 
     table1.on('select', function (e, dt, type, indexes) {
+        $('#dailyAverageSale').text(0);
+        $('#renderPoint').text(0);
+        $('#available').text(0);
+        $('#sold').text(0);
+
         var selectedRowData = table1.rows(indexes).data().toArray(); // Change 'table' to 'table1'
         if (selectedRowData.length > 0) {
             var productId = selectedRowData[0][1];
@@ -63,34 +68,29 @@ $(document).ready(function () {
     });
 
 
-        // DataTable initialization code for both tables (all-table and shared-table)
     
-        // Add click event listener to the toggle buttons
         $('.toggle-btn').click(function() {
-            // Get the target type (all or shared) from the data attribute
+            $('#dailyAverageSale').text(0);
+            $('#renderPoint').text(0);
+            $('#available').text(0);
+            $('#sold').text(0);
             var target = $(this).data('target');
             console.log(target);
-            // Hide all tables by default
             $('allTable').hide();
             $('sharedTable').hide();
     
-            // Show the table corresponding to the target type
             $('#' + target ).show();
     
-            // Hide the shared table if the "All" button is selected
             if (target === 'allTable') {
                 $('#sharedTable').hide();
                 $('#allTable').show();
             } else {
                 $('#sharedTable').show();
                 $('#allTable').hide();
-
             }
     
-            // Remove 'active' class from all toggle buttons
             $('.toggle-btn').removeClass('active');
     
-            // Add 'active' class to the clicked button
             $(this).addClass('active');
 
             if ($(this).hasClass('active')) {
@@ -100,7 +100,6 @@ $(document).ready(function () {
             }
         });
     
-        // Initially show the 'All' table and add 'active' class to the 'All' button
         $('#allTable').show();
         $('.toggle-btn[data-target="all"]').addClass('active');
     
