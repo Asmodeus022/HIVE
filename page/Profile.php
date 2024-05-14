@@ -2,6 +2,17 @@
     session_start();
     @include "../includes/database.php";
     @include "../includes/header.php";
+
+    // Check the user's role
+$user_role = $_SESSION['role'];
+
+// Define admin role
+define("ROLE_ADMIN", "OWNER");
+
+// Function to determine if the user is an admin
+function is_admin() {
+    return $_SESSION['role'] === ROLE_ADMIN;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -122,7 +133,11 @@
                 </Table>
 
                 <div class='d-flex justify-content-end mt-4'>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Employe</button>
+                    <?php
+                            if (is_admin()) {
+                                echo "<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#exampleModal'>Add Employe</button>";
+                            }
+                        ?>
                 </div>
 
                 <h4 class="">Employee</h4>
@@ -147,17 +162,29 @@
                                     echo "<td>" . $employee['Username'] . "</td>";
                                     echo "<td>" . $employee['Role'] . "</td>";
                                     echo "<td>" . $employee['Added_Date'] . "</td>";
+                                    
                                     echo "<td>
-                                            <div class='d-flex justify-content-center'>
-                                                <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#updateEmployee' data-employeeid='" . $employee['Id'] . "'  data-username='" . $employee['Username'] . "' data-role='" . $employee['Role'] . "'>Edit</button>
-                                                <button type='button' class='btn btn-danger deleteEmployee' data-employeeid='" . $employee['Id'] . "'>Delete</button>
-                                            </div>
-                                        </td>";
+                                            <div class='d-flex justify-content-center'>";
+                                    
+                                    if (is_admin()) {
+                                        echo "<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#updateEmployee' data-employeeid='" . $employee['Id'] . "'  data-username='" . $employee['Username'] . "' data-role='" . $employee['Role'] . "'>Edit</button>";
+                                    } else {
+                                        echo "<button type='button' class='btn btn-primary' disabled>Edit</button>";
+                                    }
+                                    
+                                    if (is_admin()) {
+                                        echo "<button type='button' class='btn btn-danger deleteEmployee' data-employeeid='" . $employee['Id'] . "'>Delete</button>";
+                                    } else {
+                                        echo "<button type='button' class='btn btn-danger' disabled>Delete</button>";
+                                    }
+                                    
+                                    echo "</div></td>";
                                     echo "</tr>";
                                 }
                             } else {
                                 echo "<tr><td colspan='12' class='text-center'>No employees found</td></tr>";
                             }
+                        ?>
 ?>
                     </tbody>
                 </Table>

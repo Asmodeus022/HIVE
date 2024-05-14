@@ -4,6 +4,17 @@
     @include "../includes/header.php";
     @include "../components/add_modal.php";
     @include "../components/update_modal.php";
+
+// Check the user's role
+$user_role = $_SESSION['role'];
+
+// Define admin role
+define("ROLE_ADMIN", "OWNER");
+
+// Function to determine if the user is an admin
+function is_admin() {
+    return $_SESSION['role'] === ROLE_ADMIN;
+}
 ?>
 
 <!DOCTYPE html>
@@ -49,12 +60,18 @@
                 <div class="col ps-4">
                     <div class="h-100 border rounded-3" style="background-color: white">
                         <div class="mt-3 me-3 d-flex justify-content-between">
-                            <div>
-                                <button type="button" class="btn btn-primary active mx-2 toggle-btn" data-target="allTable">All</button>
-                                <button type="button" class="btn btn-primary toggle-btn" data-target="sharedTable">Shared Item</button>
-                            </div>
+                        <div>
+                            <button type="button" class="btn btn-primary active mx-2 toggle-btn" data-target="allTable">All</button>
+                            <button type="button" class="btn btn-primary toggle-btn" data-target="sharedTable">Shared Item</button>
+                        </div>
 
-                            <button type="button" class="btn btn-hive" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Add Item</button>
+                        <?php
+                            if (is_admin()) {
+                                echo '<button type="button" class="btn btn-hive" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Add Item</button>';
+                            } else {
+                                echo '<button type="button" class="btn btn-hive" disabled>Add Item</button>';
+                            }
+                            ?>
                         </div>
                         <div class="p-2">
                             <div id='allTable' style='display: block'>
@@ -127,27 +144,27 @@
                                                     echo "<td>{$row['Price']}</td>";
                                                     echo "<td>{$row['Quantity']}</td>";
                                                     echo "<td>{$row['Owner']}</td>"; 
-                                                    echo "<td>
-                                                            <button type=\"button\"
-                                                            class=\"btn btn-hive update-btn\" 
-                                                            data-bs-toggle=\"modal\"
-                                                            data-bs-target=\"#staticBackdrop_update\"
-                                                            data-product-id=\"{$row['Id']}\"
-                                                            data-product-name=\"{$row['Name']}\"
-                                                            data-category=\"{$row['Category']}\"
-                                                            data-brand=\"{$row['Brand']}\"
-                                                            data-price=\"{$row['Price']}\"
-                                                            data-quantity=\"{$row['Quantity']}\"
-                                                            data-daily-ave=\"{$row['Daily_Ave']}\"
-                                                            data-render-point=\"{$row['Render_Point']}\">Update</button>
-                                                        </td>";
+                                                    
+                                                    // Conditionally render the update button based on the user's role
+                                                    echo "<td>";
+                                                    if (is_admin()) {
+                                                        echo "<button type=\"button\" class=\"btn btn-hive update-btn\" 
+                                                                    data-bs-toggle=\"modal\" data-bs-target=\"#staticBackdrop_update\"
+                                                                    data-product-id=\"{$row['Id']}\"
+                                                                    data-product-name=\"{$row['Name']}\"
+                                                                    data-category=\"{$row['Category']}\"
+                                                                    data-brand=\"{$row['Brand']}\"
+                                                                    data-price=\"{$row['Price']}\"
+                                                                    data-quantity=\"{$row['Quantity']}\"
+                                                                    data-daily-ave=\"{$row['Daily_Ave']}\"
+                                                                    data-render-point=\"{$row['Render_Point']}\">Update</button>";
+                                                    } else {
+                                                        echo "<button type=\"button\" class=\"btn btn-hive update-btn\" disabled>Update</button>";
+                                                    }
+                                                    echo "</td>";
                                                     echo "</tr>";
                                                 }
-                                            } else {
-                                                echo "<tr><td colspan='8'>No data found</td></tr>";
                                             }
-
-                                            
                                         ?>
 
                                     </tbody>
