@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    var table = $('#myTable').DataTable({
+    var table1 = $('#all-table').DataTable({
         paging: false,
         scrollCollapse: true,
         scrollY: 'calc(100vh - 300px)',
@@ -8,7 +8,16 @@ $(document).ready(function () {
         }
     });
 
-    table.on('select', function (e, dt, type, indexes) {
+    var table = $('#shared-table').DataTable({
+        paging: false,
+        scrollCollapse: true,
+        scrollY: 'calc(100vh - 300px)',
+        select: {
+            style: 'single'
+        }
+    });
+
+    table1.on('select', function (e, dt, type, indexes) {
         var selectedRowData = table.rows(indexes).data().toArray();
         if (selectedRowData.length > 0) {
             var productId = selectedRowData[0][1];
@@ -35,6 +44,48 @@ $(document).ready(function () {
         }
     });
 
+
+        // DataTable initialization code for both tables (all-table and shared-table)
+    
+        // Add click event listener to the toggle buttons
+        $('.toggle-btn').click(function() {
+            // Get the target type (all or shared) from the data attribute
+            var target = $(this).data('target');
+            console.log(target);
+            // Hide all tables by default
+            $('allTable').hide();
+            $('sharedTable').hide();
+    
+            // Show the table corresponding to the target type
+            $('#' + target ).show();
+    
+            // Hide the shared table if the "All" button is selected
+            if (target === 'allTable') {
+                $('#sharedTable').hide();
+                $('#allTable').show();
+            } else {
+                $('#sharedTable').show();
+                $('#allTable').hide();
+
+            }
+    
+            // Remove 'active' class from all toggle buttons
+            $('.toggle-btn').removeClass('active');
+    
+            // Add 'active' class to the clicked button
+            $(this).addClass('active');
+
+            if ($(this).hasClass('active')) {
+                $('#' + target).css('display', 'block');
+            } else {
+                $('#' + target).css('display', 'none');
+            }
+        });
+    
+        // Initially show the 'All' table and add 'active' class to the 'All' button
+        $('#allTable').show();
+        $('.toggle-btn[data-target="all"]').addClass('active');
+    
 });
 
 
