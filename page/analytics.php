@@ -6,20 +6,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <body>
-    <div class="row p-0 m-0" style="height: 100vh; overflow: hidden">
+    <div class="row p-0 m-0" style="height: 100vh">
         <div class="col-1 h-100" style="min-width: 100px">
             <?php include '../components/sidebar.php'; ?>
         </div>
         <div class="col">
             <div class="row p-3 h-100">
                 <h3 class=" mb-4">Analytics</h3>
-                <div class='h-75'>
-                    <div class='col-8'>
-                        <canvas id="myChart"></canvas>
-                    </div>
-                    <div class='col-4'>
-                        <canvas id="myPieChart"></canvas>
-                    </div>
+                <div class='col-8 h-75'>
+                    <h3>Daily Sold Amount</h3>
+                    <canvas id="myChart"></canvas>
+                </div>
+                <div class='col-4 h-75'>
+                    <h3>Top 5 Sold Products</h3>
+                    <canvas id="myPieChart"></canvas>
                 </div>
             </div>
         </div>

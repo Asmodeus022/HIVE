@@ -1,5 +1,3 @@
-
-
 $(document).ready(function(){
     $.ajax({
         url: '../API/getDataRecords.php',
@@ -23,6 +21,8 @@ $(document).ready(function(){
                     }]
                 },
                 options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
                     scales: {
                         y: {
                             beginAtZero: true
@@ -36,39 +36,44 @@ $(document).ready(function(){
             alert('Error occurred while fetching data. Please try again.');
         }
     });
-});
 
+    $.ajax({
+        url: '../API/getTopSoldProducts.php',
+        type: 'GET',
+        success: function(response) {
 
-$(document).ready(function() {
-    // Data for the pie chart
-    var data = {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'red',
-                'blue',
-                'yellow',
-                'green',
-                'purple',
-                'orange'
-            ]
-        }]
-    };
+            var labels = response.labels.slice(0, 5); // Get top 5 product names
+            var quantities = response.quantities.slice(0, 5); // Get top 5 product quantities
 
-    // Configuration options
-    var options = {
-        responsive: true,
-        maintainAspectRatio: false,
-    };
+            var topProductsData = {
+                labels: labels,
+                datasets: [{
+                    data: quantities,
+                    backgroundColor: [
+                        '#ff0000', // red
+                        '#0000ff', // blue
+                        '#ffff00', // yellow
+                        '#00ff00', // green
+                        '#800080'  // purple
+                    ]
+                }]
+            };
 
-    // Get the canvas element
-    var ctx = document.getElementById('myPieChart').getContext('2d');
+            var options = {
+                responsive: true,
+                maintainAspectRatio: false,
+            };
 
-    // Create the pie chart
-    var myPieChart = new Chart(ctx, {
-        type: 'pie',
-        data: data,
-        options: options
+            var ctx = document.getElementById('myPieChart').getContext('2d');
+            var myPieChart = new Chart(ctx, {
+                type: 'pie',
+                data: topProductsData,
+                options: options
+            });
+        },
+        error: function(xhr, status, error) {
+            console.error(xhr.responseText);
+            alert('Error occurred while fetching data. Please try again.');
+        }
     });
 });
