@@ -25,7 +25,7 @@ $(document).ready(function () {
         $('#available').text(0);
         $('#sold').text(0);
 
-        var selectedRowData = table1.rows(indexes).data().toArray(); // Change 'table' to 'table1'
+        var selectedRowData = table1.rows(indexes).data().toArray();
         if (selectedRowData.length > 0) {
             var productId = selectedRowData[0][1];
             console.log(productId);

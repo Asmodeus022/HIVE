@@ -1,7 +1,5 @@
 <?php
-
     session_start();
-    @include "./cross_access.php";
     @include "../includes/database.php";
     @include "../includes/header.php";
 ?>
