@@ -98,7 +98,8 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <img src="<?php echo "../includes/phpuploads/uploads/" . $newsItem['file_path']; ?>" class="card-img-top" alt="...">
+                                    <?php $imagePath = '../includes/phpupload/uploads/' . $newsItem['file_path']; ?>
+                                    <img src="<?php echo $imagePath; ?>" class="card-img-top" alt="..." style="width: 500px">
                                     <p class="card-text"><?php echo $newsItem['content']; ?></p>
                                 </div>
                                 <div class="card-footer text-muted d-flex justify-content-between align-items-center">
