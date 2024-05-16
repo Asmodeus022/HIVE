@@ -41,11 +41,7 @@
                     <img src="../assets/images/photo.svg" style="width: 40px; height: 40px;" alt="">
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link <?php echo ($_SERVER['REQUEST_URI'] == '/dark.php') ? 'active' : ''; ?> p-2" href="./dark.php">
-                    <img src="../assets/images/mode.svg" style="width: 40px; height: 40px;" alt="">
-                </a>
-            </li>
+        
         </ul>
         
         <div class="btn-group dropup position-absolute bottom-0 start-50 translate-middle-x mb-3 z-3">

@@ -6,57 +6,23 @@
 
     $username_session = $_SESSION["username"];
     $location_session = $_SESSION["location"];
-     // Fetch news items from the database
-     $query = "SELECT * FROM newsfeed";
-     $result = mysqli_query($conn, $query);
- 
-     // Check if query executed successfully
-     if (!$result) {
-         die("Database query failed.");
-     }
- 
-     // Fetch the data into an array
-     $newsData = array();
-     while ($row = mysqli_fetch_assoc($result)) {
-         $newsData[] = $row;
-     }
-     // Close the database connection
-     mysqli_close($conn);
 
-    $suggestedUsernames = array(
-        "Max", "Nekonics", "Paul", "Tyrone", "Sharlyn",
-        "Pajeto", "Sera", "Asmodeus", "Amanda", "Arnel"
-    );
+    // Fetch news items from the database in descending order by date
+    $query = "SELECT * FROM newsfeed ORDER BY date DESC";
+    $result = mysqli_query($conn, $query);
 
-    $locations = array(
-        "Angeles City", "Pandan", "Balibago", "Marisol", "Apalit",
-        "Dolores", "Lakandula", "Consuelo", "Maimpis", "Pulung Bulu"
-    );
-
-    // Function to get unique random items from an array
-    function getUniqueRandomItems($array, $count) {
-        if ($count > count($array)) {
-            $count = count($array);
-        }
-        $randomKeys = array_rand($array, $count);
-        $randomItems = array();
-        foreach ((array) $randomKeys as $key) {
-            $randomItems[] = $array[$key];
-        }
-        return $randomItems;
+    // Check if query executed successfully
+    if (!$result) {
+        die("Database query failed.");
     }
 
-    // Get four unique random usernames
-    $uniqueRandomUsernames = getUniqueRandomItems($suggestedUsernames, 4);
-
-    // Get four unique random locations
-    $uniqueRandomLocations = getUniqueRandomItems($locations, 4);
-
-    // Add a random number of likes to each news item
-    foreach ($newsData as &$newsItem) {
-        $newsItem['likes'] = rand(1, 100); // Random number between 1 and 100
+    // Fetch the data into an array
+    $newsData = array();
+    while ($row = mysqli_fetch_assoc($result)) {
+        $newsData[] = $row;
     }
-    unset($newsItem); // Break the reference with the last element
+    // Close the database connection
+    mysqli_close($conn);
 ?>
 
 <!DOCTYPE html>
@@ -73,7 +39,7 @@
         <div class="col-1 h-100" style="min-width: 100px">
             <?php include '../components/sidebar.php'; ?>
         </div>
-        <div class="col-8">
+        <div class="col">
             <div class="row">
                 <div class="profile-pic">
                     <img
@@ -81,7 +47,11 @@
                         src="../assets/images/HIVE SVG BRAND.svg"
                     />
                 </div>
-                <button type="button" class="btn border m-3 custom-text-box" data-bs-toggle="modal" data-bs-target="#staticBackdropAddPost">Share a Story...</button>
+                <div class="col">
+                    <div class="row w-auto">
+                        <button type="button" class="btn border m-3 custom-text-box" data-bs-toggle="modal" data-bs-target="#staticBackdropAddPost">Share a Story...</button>
+                    </div>
+                </div>
             </div>
             <div class="container-fluid scrollable-container" style="height: calc(100vh - 80px); overflow-y: auto;">
                 <div class="row">
@@ -104,16 +74,12 @@
                                 </div>
                                 <div class="card-footer text-muted d-flex justify-content-between align-items-center">
                                     <span><?php echo $newsItem['date']; ?></span>
-                                    <div>
-                                        <!-- Heart Icon -->
-                                        <img class="" src="../assets/images/heart.svg">
-                                        <!-- Email Icon -->
-                                        <img class="" src="../assets/images/mail.svg">
-                                        <!-- Star Icon -->
-                                        <img class="" src="../assets/images/star.svg">
-                                        <!-- Likes Count -->
-                                        <img class="" src="../assets/images/thumb_up.svg">
-                                        <span class="ms-1"><?php echo $newsItem['likes']; ?> likes</span>
+                                    <div>  
+                                        <!-- Like Button -->
+                                        <button class="like-button" data-post-id="<?php echo $newsItem['id']; ?>">
+                                            <img src="../assets/images/thumb_up.svg" alt="Thumb Up Icon">
+                                        </button>
+                                        <span class="likes-count ms-1"><?php echo $newsItem['likes']; ?> likes</span>
                                     </div>
                                 </div>
                             </div>
@@ -122,41 +88,32 @@
                 </div>
             </div>
         </div>
-        <div class="col-3">
-            <div class="position-absolute top-0 end-2 p-3" style="padding-top: 0px;">
-                <div class="row align-items-center">
-                    <div class="col-auto">
-                        <img class="profile-pic mb-2" src="../assets/images/HIVE SVG BRAND.svg">
-                    </div>
-                    <div class="col">
-                        <p class="fw-bold mb-1"><?php echo $username_session?></p>
-                        <p class="text-muted mb-0"><?php echo $location_session?></p>
-                    </div>
-                </div>
-                <h4>Suggested for you</h4>
-                <div class="row align-items-center">
-                    <?php 
-                    for ($i = 0; $i < count($uniqueRandomUsernames); $i++) { ?>
-                        <div class="row align-items-center mb-1">
-                            <div class="col-auto">
-                                <img class="profile-pic mb-2" src="../assets/images/HIVE SVG BRAND.svg" alt="Profile Picture">
-                            </div>
-                            <div class="col">
-                                <p class="fw-bold mb-0"><?php echo $uniqueRandomUsernames[$i]; ?></p>
-                                <p class="text-muted mb-0"><?php echo $uniqueRandomLocations[$i]; ?></p>
-                            </div>
-                            <div class="col-auto">
-                                <button type="button" class="btn btn-hive">Follow</button>
-                            </div>
-                        </div>
-                    <?php } ?>
-                </div>
-                <div class="my-3"><small>About • Help • Jobs • Privacy • Terms • Locations</small></div>
-                <small>@ 2024 Hive</small>
-            </div>
-        </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script>
+$(document).ready(function() {
+    $('.like-button').on('click', function() {
+        var button = $(this);
+        var postId = button.data('post-id');
+        $.ajax({
+            url: '../includes/update_likes.php',
+            type: 'POST',
+            data: { post_id: postId },
+            success: function(response) {
+                var data = JSON.parse(response);
+                if (data.likes) {
+                    button.next('.likes-count').text(data.likes + ' likes');
+                } else if (data.error) {
+                    console.error(data.error);
+                }
+            },
+            error: function() {
+                console.error('Error updating likes');
+            }
+        });
+    });
+});
+</script>
 </body>
 </html>
