@@ -5,7 +5,7 @@
     function authenticateUser($email, $pword)
     {
         global $conn;
-        $stmt = $conn->prepare("SELECT `Username`, `Email`, `Password`, `Id`, `Role` FROM `owners` WHERE `Email` = ?");
+        $stmt = $conn->prepare("SELECT `Username`, `Email`, `Password`, `Id`, `Role` , `Location` FROM `owners` WHERE `Email` = ?");
         $stmt->bind_param("s", $email);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -17,6 +17,7 @@
             $password = $row['Password'];
             $ownerId = $row['Id'];
             $role = $row['Role'];
+            $location = $row['Location'];
 
             if (md5($pword) == $password) {
                 $_SESSION['username'] = $username;
@@ -24,6 +25,7 @@
                 $_SESSION['password'] = $password;
                 $_SESSION['ownerId'] = $ownerId;
                 $_SESSION['role'] = $role;
+                $_SESSION['location'] = $location;
                 header("Location: ../page/dashboard.php");
                 exit();
             } else {
