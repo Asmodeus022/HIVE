@@ -5,6 +5,9 @@
 ?>
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+</head>
 <body>
     <div class="row p-0 m-0" style="height: 100vh">
         <div class="col-1 h-100" style="min-width: 100px">
@@ -12,7 +15,7 @@
         </div>
         <div class="col">
             <div class="row p-3 h-100">
-                <h3 class=" mb-4">Dashboard</h3>
+                <h3 class="mb-4">Dashboard</h3>
                 <div class='row'>
                     <div class="col-12">
                         <h3>Recent Transaction</h3>
@@ -32,7 +35,10 @@
                 </div>
                 <div class='row'>
                     <div class="col-9 h-75">
-                        <h3>Monthly Sales</h3>
+                        <div class='d-flex align-items-center'>
+                            <h3 class="mr-3">Monthly Sales</h3>
+                            <input type="text" id="dateRangePicker" class="form-control" style="max-width: 250px; margin-left: 15px;" />
+                        </div>
                         <canvas id="myChart"></canvas>
                     </div>
                     <div class="col-3 h-75">
@@ -49,6 +55,87 @@
     <script src="https://cdn.datatables.net/select/2.0.2/js/select.dataTables.js"></script>
     <script src="https://cdn.datatables.net/select/2.0.2/js/dataTables.select.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <script src="../assets/js/dashboard.js"></script>
+    <script>
+        var myChartInstance = null;
+
+        $(document).ready(function() {
+            // Initialize date range picker
+            $('#dateRangePicker').daterangepicker({
+                opens: 'left',
+                locale: {
+                    format: 'YYYY-MM-DD'
+                }
+            }, function(start, end, label) {
+                console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+                fetchMonthlySalesData(start.format('YYYY-MM-DD'), end.format('YYYY-MM-DD'));
+            });
+
+            // Function to fetch monthly sales data
+            function fetchMonthlySalesData(startDate, endDate) {
+                $.ajax({
+                    url: '../API/getMonthlySalesData.php',
+                    type: 'GET',
+                    data: {
+                        start_date: startDate,
+                        end_date: endDate
+                    },
+                    success: function(response) {
+                        var data = JSON.parse(response);
+
+                        if (data.error) {
+                            console.error(data.error);
+                            alert('Error occurred while fetching data. Please try again.');
+                            return;
+                        }
+
+                        var labels = data.labels;
+                        var totalAmountData = data.totalAmountData;
+
+                        var ctx = document.getElementById('myChart').getContext('2d');
+                        
+                        // Destroy the previous chart instance if it exists
+                        if (myChartInstance) {
+                            myChartInstance.destroy();
+                        }
+
+                        // Create a new chart instance
+                        myChartInstance = new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                                labels: labels,  // Dates
+                                datasets: [{
+                                    label: 'Total Amount',
+                                    data: totalAmountData,  // Amounts
+                                    borderColor: 'rgb(75, 192, 192)',
+                                    tension: 0.1
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                scales: {
+                                    y: {
+                                        beginAtZero: true
+                                    }
+                                }
+                            }
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr.responseText);
+                        alert('Error occurred while fetching data. Please try again.');
+                    }
+                });
+            }
+
+            // Initial fetch for the current month
+            var startOfMonth = moment().startOf('month').format('YYYY-MM-DD');
+            var endOfMonth = moment().endOf('month').format('YYYY-MM-DD');
+            fetchMonthlySalesData(startOfMonth, endOfMonth);
+        });
+    </script>
 </body>
 </html>
