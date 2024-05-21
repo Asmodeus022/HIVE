@@ -41,10 +41,9 @@ $(document).ready(function(){
         url: '../API/getTopSoldProducts.php',
         type: 'GET',
         success: function(response) {
-            var data = JSON.parse(response);
 
-            var labels = data.labels.slice(0, 5); // Get top 5 product names
-            var quantities = data.quantities.slice(0, 5); // Get top 5 product quantities
+            var labels = response.labels.slice(0, 5); // Get top 5 product names
+            var quantities = response.quantities.slice(0, 5); // Get top 5 product quantities
 
             var topProductsData = {
                 labels: labels,
@@ -78,18 +77,17 @@ $(document).ready(function(){
         }
     });
 
-    // Fetch total sales
-$.ajax({
+    $.ajax({
     url: '../API/getTotalSales.php',
     type: 'GET',
     success: function(response) {
-        document.getElementById('totalSales').textContent = parseFloat(response.totalSales).toFixed(2);
+        console.log('Total sales response:', response);
+        $('#totalSales').text(parseFloat(response.totalSales).toFixed(2));
     },
     error: function(xhr, status, error) {
         console.error(xhr.responseText);
         alert('Error occurred while fetching total sales. Please try again.');
     }
 });
-
 
 });
