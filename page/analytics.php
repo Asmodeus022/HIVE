@@ -12,7 +12,10 @@
         </div>
         <div class="col">
             <div class="row p-3 h-100">
-                <h3 class=" mb-4">Analytics</h3>
+                <h3 class="mb-4">Analytics</h3>
+                <div class='col-12 mb-4'>
+                    <h3>Total Sales: $<span id="totalSales">0.00</span></h3>
+                </div>
                 <div class='col-8 h-75'>
                     <h3>Daily Sold Amount</h3>
                     <canvas id="myChart"></canvas>
