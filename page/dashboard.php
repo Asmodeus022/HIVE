@@ -2,14 +2,48 @@
     session_start();
     @include "../includes/database.php";
     @include "../includes/header.php";
+
+    if (!isset($_SESSION['username'])) {
+        header("Location: ../login.php");
+        exit();
+    }
+
+    $welcomeMessage = isset($_SESSION['welcome_message']) ? $_SESSION['welcome_message'] : '';
+    unset($_SESSION['welcome_message']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <!-- <style>
+        .custom-alert {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            display: block; /* Initially hidden */
+            animation: fadeInDown 0.5s forwards;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style> -->
 </head>
 <body>
+    <?php if ($welcomeMessage): ?>
+        <div class='alert-modal success d-flex'><?php echo $welcomeMessage; ?></div>
+    <?php endif; ?>
     <div class="row p-0 m-0" style="height: 100vh">
+
         <div class="col-1 h-100" style="min-width: 100px">
             <?php include '../components/sidebar.php'; ?>
         </div>

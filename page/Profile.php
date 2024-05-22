@@ -4,19 +4,22 @@
     @include "../includes/header.php";
 
     // Check the user's role
-$user_role = $_SESSION['role'];
+    $user_role = $_SESSION['role'];
 
-// Define admin role
-define("ROLE_ADMIN", "OWNER");
+    // Define admin role
+    define("ROLE_ADMIN", "OWNER");
 
-// Function to determine if the user is an admin
-function is_admin() {
-    return $_SESSION['role'] === ROLE_ADMIN;
-}
+    // Function to determine if the user is an admin
+    function is_admin() {
+        return $_SESSION['role'] === ROLE_ADMIN;
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <body>
+    <div class="alert-modal" id="alertModal" style="display: none;">
+        <!-- Initially empty, content will be added dynamically -->
+    </div>
     <div class="row p-0 m-0" style="height: 100vh; overflow: hidden">
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -28,12 +31,16 @@ function is_admin() {
                 <div class="modal-body">
                     <form action="" method="POST" id="addEmployeeForm">
                         <div class="mb-3">
-                            <label for="username" class="form-label">Username</label>
-                            <input type="text" class="form-control" name='employeeUsername' id="username" placeholder="" required>
+                            <label for="fullname" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" name='employeeFullname' id="fullname" placeholder="" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" name='employeeEmail' id="email" placeholder="" required>
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" name='password' id="password" placeholder="" required>
+                            <input type="password" class="form-control" name='employeePassword' id="password" placeholder="" required>
                         </div>
                         <select class="form-select" name="employeeRole" id="employeeRole" aria-label="Default select example" required>
                             <option selected>Select Role</option>
@@ -64,12 +71,16 @@ function is_admin() {
                 <div class="modal-body">
                     <form action="" method="POST" id="updateEmployeeForm">
                         <div class="mb-3">
-                            <label for="updateUsername" class="form-label">Username</label>
-                            <input type="text" class="form-control" name='updateEmployeeUsername' id="updateUsername" placeholder="" required>
+                            <label for="updateEmployeeFullname" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" name='updateEmployeeFullname' id="updateEmployeeFullname" placeholder="" required>
                         </div>
                         <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" name='updatePassword' id="updatePassword" placeholder="Set new password" required>
+                            <label for="updateEmployeeEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" name='updateEmployeeEmail' id="updateEmployeeEmail" placeholder="" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="updateEmployeePassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" name='updateEmployeePassword' id="updateEmployeePassword" placeholder="Set new password" required>
                         </div>
                         <select class="form-select" name="updateEmployeeRole" id="updateEmployeeRole" aria-label="Default select example" required>
                             <option selected>Select Role</option>
@@ -87,6 +98,54 @@ function is_admin() {
                 </div>
                 <div class="modal-footer">
                 </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="deleteEmployeeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Employee</h1>
+                        <button type="button" class="btn-close me-2" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row m-0 pb-1">
+                            <div class="col-4">
+                                <h5 class='m-0 p-0'>Id</h5>
+                            </div>
+                            <div class="col-8">
+                                <p class='m-0 p-0' id='employeeId'></p>
+                            </div>
+                        </div>
+                        <div class="row m-0 pb-1">
+                            <div class="col-4">
+                                <h5 class='m-0 p-0'>Full Name</h5>
+                            </div>
+                            <div class="col-8">
+                                <p class='m-0 p-0' id='fullName'></p>
+                            </div>
+                        </div>
+                        <div class="row m-0 pb-1">
+                            <div class="col-4">
+                                <h5 class='m-0 p-0'>Email</h5>
+                            </div>
+                            <div class="col-8">
+                                <p class='m-0 p-0' id='delEmail'></p>
+                            </div>
+                        </div>
+                        <div class="row m-0 pb-1">
+                            <div class="col-4">
+                                <h5 class='m-0 p-0'>Role</h5>
+                            </div>
+                            <div class="col-8">
+                                <p class='m-0 p-0' id='role'></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+                        <button type="button" class="btn btn-danger" id="confirmDeleteEmployee">Confirm Delete</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -141,52 +200,59 @@ function is_admin() {
                 </div>
 
                 <h4 class="">Employee</h4>
-                <Table class='table '>
-                    <thead>
-                        <tr>
-                            <th>Username</th>
-                            <th>Role</th>
-                            <th>Added Date</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                            $ownerId = $_SESSION['ownerId'];
-                            $query = "SELECT * FROM employees WHERE Owner_Id = '$ownerId'";
-                            $result = mysqli_query($conn, $query);
+                
+                <div style='overflow-x: auto; max-height: 600px;'>
+                    <Table class='table'>
+                        <thead>
+                            <tr>
+                                <th>Full Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Added Date</th>
+                                <th class='text-center'>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            <?php
+                                $ownerId = $_SESSION['ownerId'];
+                                $query = "SELECT * FROM employees WHERE Owner_Id = '$ownerId'";
+                                $result = mysqli_query($conn, $query);
 
-                            if ($result && mysqli_num_rows($result) > 0) {
-                                while ($employee = mysqli_fetch_assoc($result)) {
-                                    echo "<tr>";
-                                    echo "<td>" . $employee['Username'] . "</td>";
-                                    echo "<td>" . $employee['Role'] . "</td>";
-                                    echo "<td>" . $employee['Added_Date'] . "</td>";
-                                    
-                                    echo "<td>
-                                            <div class='d-flex justify-content-center'>";
-                                    
-                                    if (is_admin()) {
-                                        echo "<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#updateEmployee' data-employeeid='" . $employee['Id'] . "'  data-username='" . $employee['Username'] . "' data-role='" . $employee['Role'] . "'>Edit</button>";
-                                    } else {
-                                        echo "<button type='button' class='btn btn-primary' disabled>Edit</button>";
+                                if ($result && mysqli_num_rows($result) > 0) {
+                                    while ($employee = mysqli_fetch_assoc($result)) {
+                                        echo "<tr>";
+                                        echo "<td>" . $employee['Full_Name'] . "</td>";
+                                        echo "<td>" . $employee['Email'] . "</td>";
+                                        echo "<td>" . $employee['Role'] . "</td>";
+                                        echo "<td>" . $employee['Added_Date'] . "</td>";
+                                        
+                                        echo "<td>
+                                                <div class='d-flex justify-content-center'>";
+                                        
+                                        if (is_admin()) {
+                                            echo "<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#updateEmployee' data-employeeid='" . $employee['Id'] . "'  data-fullname='" . $employee['Full_Name'] . "' data-email='" . $employee['Email'] . "' data-role='" . $employee['Role'] . "'>Edit</button>";
+                                        } else {
+                                            echo "<button type='button' class='btn btn-primary' disabled>Edit</button>";
+                                        }
+                                        
+                                        if (is_admin()) {
+                                            echo "<button type='button' class='btn btn-danger deleteEmployee' data-bs-toggle='modal' data-bs-target='#deleteEmployeeModal' data-employeeid='" . $employee['Id'] . "' data-fullname='" . $employee['Full_Name'] . "' data-email='" . $employee['Email'] . "' data-role='" . $employee['Role'] . "'>Delete</button>";
+                                            // echo "<button type='button' class='btn btn-danger deleteEmployee' data-employeeid='" . $employee['Id'] . "'>Delete</button>";
+                                        } else {
+                                            echo "<button type='button' class='btn btn-danger' disabled>Delete</button>";
+                                        }
+                                        
+                                        echo "</div></td>";
+                                        echo "</tr>";
                                     }
-                                    
-                                    if (is_admin()) {
-                                        echo "<button type='button' class='btn btn-danger deleteEmployee' data-employeeid='" . $employee['Id'] . "'>Delete</button>";
-                                    } else {
-                                        echo "<button type='button' class='btn btn-danger' disabled>Delete</button>";
-                                    }
-                                    
-                                    echo "</div></td>";
-                                    echo "</tr>";
+                                } else {
+                                    echo "<tr><td colspan='12' class='text-center'>No employees found</td></tr>";
                                 }
-                            } else {
-                                echo "<tr><td colspan='12' class='text-center'>No employees found</td></tr>";
-                            }
-                        ?>
-                    </tbody>
-                </Table>
+                            ?>
+                        </tbody>
+                    </Table>
+                </div>
             </div>
         </div>
     </div>

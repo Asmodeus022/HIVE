@@ -1,4 +1,14 @@
 $(document).ready(function() {
+    function showAlertModal(message, type) {
+        var alertModal = $('#alertModal');
+        alertModal.html(message);
+        alertModal.addClass('alert-modal ' + type).show();
+
+        setTimeout(function(){
+            location.reload();
+        }, 3000);
+    }
+
     function loadProducts() {
         $.ajax({
             type: "GET",
@@ -27,6 +37,7 @@ $(document).ready(function() {
                 });
             },
             error: function(xhr, status, error) {
+                showAlertModal()
                 console.error(xhr.responseText);
             }
         });
