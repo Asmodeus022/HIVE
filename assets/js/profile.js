@@ -1,4 +1,15 @@
 $(document).ready(function(){
+    function showAlertModal(message, type) {
+        var alertModal = $('#alertModal');
+        alertModal.html(message);
+        alertModal.addClass('alert-modal ' + type).show();
+
+        setTimeout(function(){
+            location.reload();
+        }, 3000);
+    }
+    
+
     $('#addEmployeeForm').submit(function(e) {
         e.preventDefault(); 
 
@@ -9,12 +20,13 @@ $(document).ready(function(){
             type: 'POST',
             data: formData,
             success: function(response) {
-                alert(response);
-                location.reload();
+                showAlertModal(response, "success");
+                $('#exampleModal').hide();
             },
             error: function(xhr, status, error) {
+                showAlertModal(xhr.responseText, "failed");
                 console.error(xhr.responseText);
-                alert('Error occurred. Please try again.');
+                // alert('Error occurred. Please try again.');
             }
         });
     });
@@ -22,10 +34,12 @@ $(document).ready(function(){
     $('#updateEmployee').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
         var employeeId = button.data('employeeid');
-        var username = button.data('username');
+        var fullName = button.data('fullname');
+        var email = button.data('email');
         var role = button.data('role');
 
-        $('#updateUsername').val(username);
+        $('#updateEmployeeFullname').val(fullName);
+        $('#updateEmployeeEmail').val(email);
         $('#updateEmployeeRole').val(role);
         $('#selectedEmployeeId').val(employeeId);
     });
@@ -34,44 +48,48 @@ $(document).ready(function(){
         e.preventDefault(); 
 
         var formData = $(this).serialize();
+        $('#updateEmployee').show();
 
         $.ajax({
             url: '../API/updateEmployee.php',
             type: 'POST',
             data: formData,
             success: function(response) {
-                alert(response);
-                location.reload();
+                showAlertModal(response, "success");
+                $('#updateEmployee').hide();
             },
             error: function(xhr, status, error) {
-                console.error(xhr.responseText);
-                alert('Error occurred. Please try again.');
+                showAlertModal(error, 'failed');
             }
         });
     });
 
-    $(document).on('click', '.deleteEmployee', function() {
+    $('.deleteEmployee').click(function() {
         var employeeId = $(this).data('employeeid');
+        var fullName = $(this).data('fullname');
+        var email = $(this).data('email');
+        var role = $(this).data('role');
 
-        if (confirm("Are you sure you want to delete this employee?")) {
+        $('#employeeId').text(employeeId);
+        $('#fullName').text(fullName);
+        $('#delEmail').text(email);
+        $('#role').text(role);
+
+        $('#deleteEmployeeModal').modal('show');
+
+        $('#confirmDeleteEmployee').click(function() {
             $.ajax({
                 url: '../API/deleteEmployee.php',
                 type: 'POST',
                 data: { employeeId: employeeId },
                 success: function(response) {
-                    alert(response);
-                    location.reload();
-                    // if (response == "success") {
-                    //     $(this).closest('tr').remove();
-                    // } else {
-                    //     alert("Failed to delete employee.");
-                    // }
+                    showAlertModal(response, 'success');
+                    $('#deleteEmployeeModal').modal('hide');
                 },
-                error: function() {
-                    // Show error message
-                    alert("An error occurred while processing your request.");
+                error: function(xhr, status, error) {
+                    showAlertModal(error, 'failed');
                 }
             });
-        }
+        });
     });
 });

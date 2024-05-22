@@ -1,4 +1,5 @@
 $(document).ready(function(){
+
     $.ajax({
         url: '../API/getRecentTransaction.php',
         type: 'GET',
@@ -34,53 +35,7 @@ $(document).ready(function(){
             console.error(xhr.responseText);
         }
     });
-
-    $.ajax({
-        url: '../API/getCurrentMonthData.php',
-        type: 'GET',
-        success: function(response) {
-            var data = JSON.parse(response);
     
-            // Check if there's an error in the response
-            if (data.error) {
-                console.error(data.error);
-                alert('Error occurred while fetching data. Please try again.');
-                return;
-            }
-    
-            var labels = data.labels;
-            var totalAmountData = data.totalAmountData;
-    
-            var ctx = document.getElementById('myChart').getContext('2d');
-            var myChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: labels,  // Dates
-                    datasets: [{
-                        label: 'Total Amount',
-                        data: totalAmountData,  // Amounts
-                        borderColor: 'rgb(75, 192, 192)',
-                        tension: 0.1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-        },
-        error: function(xhr, status, error) {
-            console.error(xhr.responseText);
-            alert('Error occurred while fetching data. Please try again.');
-        }
-    });
-    
-
     $.ajax({
         url: '../API/getTopSoldProducts.php',
         type: 'GET',
@@ -120,4 +75,7 @@ $(document).ready(function(){
             alert('Error occurred while fetching data. Please try again.');
         }
     });
+
+
+    
 });

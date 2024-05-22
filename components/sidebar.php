@@ -44,7 +44,11 @@
         
         </ul>
         
-        <div class="btn-group dropup position-absolute bottom-0 start-50 translate-middle-x mb-3 z-3">
+        <div class="btn-group dropup d-flex flex-column position-absolute bottom-0 start-50 translate-middle-x mb-3 z-3">
+            <div class='text-center'>
+                <p class='m-0'><?php echo $_SESSION['username']?></p>
+                <p>(<?php echo $_SESSION['role']?>)</p>
+            </div>
         
             <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src="../assets/images/account.svg" style="width: 40px; height: 40px;" alt="">

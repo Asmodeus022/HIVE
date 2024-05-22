@@ -42,7 +42,6 @@
                                 <a href="registration_page.php">Ceate Account</a>
                                 <a href="password_recovery.php">Forgot Password</a>
                             </div>
-                            <a href="loginEmployee.php">Login as employee</a>
 
                             <div class="d-flex justify-content-end">
                                 <button class="btn btn-hive" type="submit" name="login">LOG IN</button>

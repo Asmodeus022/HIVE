@@ -9,7 +9,7 @@
         $deleteQuery = "DELETE FROM employees WHERE Id = $employeeId AND Owner_Id = $ownerId";
 
         if (mysqli_query($conn, $deleteQuery)) {
-            echo "success";
+            echo "Deleted employee with Id: $employeeId";
         } else {
             echo "error";
         }
